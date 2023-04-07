@@ -10,7 +10,7 @@ public class Artigo {
 
 
 
-    
+
     public void setNum_donos(int num_donos) {
         this.num_donos = num_donos;
     }

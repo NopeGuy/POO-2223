@@ -1,6 +1,6 @@
 package Items;
 
-public class Sapatilha {
+public class Sapatilha extends Artigo{
     private int tamanho;
     private boolean atacadores;
     private String cor;
