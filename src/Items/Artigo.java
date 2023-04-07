@@ -6,10 +6,17 @@ public class Artigo {
     private String item_id;
     private double preco;
     private double desconto;
-    private boolean usado;
+    private int num_donos;
 
 
 
+    
+    public void setNum_donos(int num_donos) {
+        this.num_donos = num_donos;
+    }
+    public int getNum_donos() {
+        return num_donos;
+    }
 
     public double getDesconto() {
         return desconto;
