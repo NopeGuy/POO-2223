@@ -23,7 +23,7 @@ public class User {
 
     //Lembrete tipos primitos não precisam de clone mesmo numa estratégia de composição
 
-    private String generateUserId() {
+    private String generateUserId() { 
         // lógica para gerar o user_id
         return "user_" + Math.round(Math.random() * 1000);
     }

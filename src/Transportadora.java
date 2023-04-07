@@ -6,4 +6,12 @@ public class Transportadora {
 
     //o fator dos impostos da vintage está definido no arranque
     //PrecoExpedicao = (V alorBase ∗ margemlucrotransportadora ∗ (1 + Imposto)) ∗ 0.9
+
+    public Transportadora(String nome, double preço_pequena, double preço_media, double preço_grande) {
+        this.nome = nome;
+        this.preço_pequena = preço_pequena;
+        this.preço_media = preço_media;
+        this.preço_grande = preço_grande;
+    }
+    
 }
