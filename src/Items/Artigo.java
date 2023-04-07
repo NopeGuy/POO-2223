@@ -1,4 +1,6 @@
 package Items;
+import java.util.Objects;
+
 
 public class Artigo {
     private String descricao;
@@ -57,5 +59,61 @@ public class Artigo {
     public void setPreco(double preco) {
         this.preco = preco;
     }
+
+    public Artigo(){
+        this.descricao = "";
+        this.marca = "";
+        this.item_id = "";
+        this.preco = 0;
+        this.desconto = 0;
+        this.num_donos = 0;
+    }
+
+    public Artigo(Artigo artigo){
+        this.descricao = artigo.getDescricao();
+        this.marca = artigo.getMarca();
+        this.item_id = artigo.getItem_id();
+        this.preco = artigo.getPreco();
+        this.desconto = artigo.getDesconto();
+        this.num_donos = artigo.getNum_donos();
+    }
+
+    public Artigo(String descricao, String marca, String item_id, double preco, double desconto, int num_donos){
+        this.descricao = descricao;
+        this.marca = marca;
+        this.item_id = item_id;
+        this.preco = preco;
+        this.desconto = desconto;
+        this.num_donos = num_donos;
+    }
+
+    public Artigo clone(){
+        return new Artigo(this);
+    }
+
+    public boolean equals(Object o){
+        if (o == this) return true;
+        if (!(o instanceof Artigo)) return false;
+        Artigo a = (Artigo) o;
+        return num_donos == a.num_donos &&
+                Objects.equals(descricao, a.descricao) &&
+                Objects.equals(marca, a.marca) &&
+                Objects.equals(item_id, a.item_id) &&
+                Objects.equals(preco, a.preco) &&
+                Objects.equals(desconto, a.desconto);
+    }
+
+    public String toString(){
+        return "Artigo{" +
+                "descricao='" + descricao + '\'' +
+                ", marca='" + marca + '\'' +
+                ", item_id='" + item_id + '\'' +
+                ", preco=" + preco +
+                ", desconto=" + desconto +
+                ", num_donos=" + num_donos +
+                '}';
+    }
+
+
 
 }
