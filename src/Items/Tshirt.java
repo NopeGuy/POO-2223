@@ -19,8 +19,8 @@ public class Tshirt extends Artigo{
         this.padrão = tshirt.getPadrão();
     }
 
-    public Tshirt(String descricao, String marca, String item_id, double preco, double desconto, int num_donos, String tamanho, String padrão) {
-        super(descricao, marca, item_id, preco, desconto, num_donos);
+    public Tshirt(String descricao, String marca, String item_id,String transportadora, double preco, double desconto, int num_donos, String tamanho, String padrão) {
+        super(descricao, marca, item_id,transportadora, preco, desconto, num_donos);
         this.tamanho = tamanho;
         this.padrão = padrão;
     }

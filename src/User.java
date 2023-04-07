@@ -12,13 +12,13 @@ public class User {
     private List<Artigo> vendeu;
     private List<Artigo> comprou;
 
-    public User(String email, String morada, int num_fiscal, List<Artigo> vendeu, List<Artigo> comprou) {
+    public User(String email, String morada, int num_fiscal) {
         this.user_id = generateUserId();
         this.email = email;
         this.morada = morada;
         this.num_fiscal = num_fiscal;
-        this.vendeu = new ArrayList<>(vendeu);
-        this.comprou = new ArrayList<>(comprou);
+        this.vendeu = new ArrayList<>();
+        this.comprou = new ArrayList<>();
     }
 
     //Lembrete tipos primitos não precisam de clone mesmo numa estratégia de composição

@@ -6,6 +6,7 @@ public class Artigo {
     private String descricao;
     private String marca;
     private String item_id;
+    private String transportadora;
     private double preco;
     private double desconto;
     private int num_donos;
@@ -18,6 +19,10 @@ public class Artigo {
     }
     public int getNum_donos() {
         return num_donos;
+    }
+
+    public String getTransportadora() {
+        return transportadora;
     }
 
     public double getDesconto() {
@@ -60,10 +65,15 @@ public class Artigo {
         this.preco = preco;
     }
 
+    public void setTransportadora(String transportadora) {
+        this.transportadora = transportadora;
+    }
+
     public Artigo(){
         this.descricao = "";
         this.marca = "";
         this.item_id = "";
+        this.transportadora = "";
         this.preco = 0;
         this.desconto = 0;
         this.num_donos = 0;
@@ -72,15 +82,17 @@ public class Artigo {
     public Artigo(Artigo artigo){
         this.descricao = artigo.getDescricao();
         this.marca = artigo.getMarca();
+        this.transportadora = artigo.getTransportadora();
         this.item_id = artigo.getItem_id();
         this.preco = artigo.getPreco();
         this.desconto = artigo.getDesconto();
         this.num_donos = artigo.getNum_donos();
     }
 
-    public Artigo(String descricao, String marca, String item_id, double preco, double desconto, int num_donos){
+    public Artigo(String descricao, String marca, String item_id,String transportadora, double preco, double desconto, int num_donos){
         this.descricao = descricao;
         this.marca = marca;
+        this.transportadora = transportadora;
         this.item_id = item_id;
         this.preco = preco;
         this.desconto = desconto;
@@ -100,7 +112,8 @@ public class Artigo {
                 Objects.equals(marca, a.marca) &&
                 Objects.equals(item_id, a.item_id) &&
                 Objects.equals(preco, a.preco) &&
-                Objects.equals(desconto, a.desconto);
+                Objects.equals(desconto, a.desconto) &&
+                Objects.equals(transportadora, a.transportadora);
     }
 
     public String toString(){
@@ -108,6 +121,7 @@ public class Artigo {
                 "descricao='" + descricao + '\'' +
                 ", marca='" + marca + '\'' +
                 ", item_id='" + item_id + '\'' +
+                ", transportadora='" + transportadora + '\'' +
                 ", preco=" + preco +
                 ", desconto=" + desconto +
                 ", num_donos=" + num_donos +

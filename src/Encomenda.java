@@ -6,13 +6,13 @@ import java.util.Objects;
 
 public class Encomenda {
     private Collection<Artigo> colecao;
-    private String dimensao;
+    private int dimensao;
     private double preco_final;
     private String estado;
     private LocalDate data_criacao;
 
     // Construtor
-    public Encomenda(Collection<Artigo> colecao, String dimensao, double preco_final, String estado, LocalDate data_criacao) {
+    public Encomenda(Collection<Artigo> colecao, int dimensao, double preco_final, String estado, LocalDate data_criacao) {
         this.colecao = new ArrayList<>(colecao);
         this.dimensao = dimensao;
         this.preco_final = preco_final;
@@ -26,7 +26,7 @@ public class Encomenda {
 
     // Construtor vazio
     public Encomenda() {
-        this(new ArrayList<>(), "", 0.0, "", LocalDate.now());
+        this(new ArrayList<>(), 0, 0.0, "", LocalDate.now());
     }
 
 
@@ -35,7 +35,7 @@ public class Encomenda {
         return new ArrayList<>(colecao);
     }
 
-    public String getDimensao() {
+    public int getDimensao() {
         return dimensao;
     }
 
@@ -53,11 +53,17 @@ public class Encomenda {
 
     // Métodos de modificação
     public void adicionarArtigo(Artigo artigo) {
-        colecao.add(artigo);
+        if(colecao.add(artigo.clone())){
+            this.dimensao++;
+            this.preco_final += artigo.getPreco();
+        }
     }
 
     public void removerArtigo(Artigo artigo) {
-        colecao.remove(artigo);
+        if(colecao.remove(artigo)){
+            this.dimensao--;
+            this.preco_final -= artigo.getPreco();
+        }
     }
 
     public void calcularPrecoFinal() {
@@ -85,7 +91,7 @@ public class Encomenda {
         if (!(o instanceof Encomenda)) return false;
         Encomenda e = (Encomenda) o;
         return Objects.equals(colecao, e.colecao) &&
-                Objects.equals(dimensao, e.dimensao) &&
+                this.dimensao==e.dimensao &&
                 Double.compare(preco_final, e.preco_final) == 0 &&
                 Objects.equals(estado, e.estado) &&
                 Objects.equals(data_criacao, e.data_criacao);
