@@ -53,16 +53,20 @@ public class Encomenda {
 
     // Métodos de modificação
     public void adicionarArtigo(Artigo artigo) {
+        if(artigo.getStock()>0){
         if(colecao.add(artigo.clone())){
             this.dimensao++;
             this.preco_final += artigo.getPreco();
+            artigo.setStock(artigo.getStock()-1);
         }
+    }
     }
 
     public void removerArtigo(Artigo artigo) {
         if(colecao.remove(artigo)){
             this.dimensao--;
             this.preco_final -= artigo.getPreco();
+            artigo.setStock(artigo.getStock()+1);
         }
     }
 
@@ -106,6 +110,7 @@ public class Encomenda {
                 ", data_criacao=" + data_criacao +
                 '}';
     }
+
 }
 
 //criar encomenda

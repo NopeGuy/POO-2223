@@ -10,7 +10,7 @@ public class Artigo {
     private double preco;
     private double desconto;
     private int num_donos;
-
+    private int stock;
 
 
 
@@ -44,6 +44,9 @@ public class Artigo {
     public double getPreco() {
         return preco;
     }
+    public int getStock(){
+        return stock;
+    }
 
     public void setDesconto(double desconto) {
         this.desconto = desconto;
@@ -68,6 +71,9 @@ public class Artigo {
     public void setTransportadora(String transportadora) {
         this.transportadora = transportadora;
     }
+    public void setStock(int stock){
+        this.stock = stock;
+    }
 
     public Artigo(){
         this.descricao = "";
@@ -77,6 +83,7 @@ public class Artigo {
         this.preco = 0;
         this.desconto = 0;
         this.num_donos = 0;
+        this.stock = 0;
     }
 
     public Artigo(Artigo artigo){
@@ -87,9 +94,10 @@ public class Artigo {
         this.preco = artigo.getPreco();
         this.desconto = artigo.getDesconto();
         this.num_donos = artigo.getNum_donos();
+        this.stock = artigo.getStock();
     }
 
-    public Artigo(String descricao, String marca, String item_id,String transportadora, double preco, double desconto, int num_donos){
+    public Artigo(String descricao, String marca, String item_id,String transportadora, double preco, double desconto, int num_donos, int stock){
         this.descricao = descricao;
         this.marca = marca;
         this.transportadora = transportadora;
@@ -97,6 +105,7 @@ public class Artigo {
         this.preco = preco;
         this.desconto = desconto;
         this.num_donos = num_donos;
+        this.stock = stock;
     }
 
     public Artigo clone(){
@@ -113,7 +122,8 @@ public class Artigo {
                 Objects.equals(item_id, a.item_id) &&
                 Objects.equals(preco, a.preco) &&
                 Objects.equals(desconto, a.desconto) &&
-                Objects.equals(transportadora, a.transportadora);
+                Objects.equals(transportadora, a.transportadora) &&
+                Objects.equals(stock, a.stock);
     }
 
     public String toString(){
@@ -125,9 +135,8 @@ public class Artigo {
                 ", preco=" + preco +
                 ", desconto=" + desconto +
                 ", num_donos=" + num_donos +
+                ", stock='" + stock + '\'' +
                 '}';
     }
-
-
 
 }
