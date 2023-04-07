@@ -78,6 +78,11 @@ public class Encomenda {
         this.preco_final = total;
     }
 
+    public boolean validaDevolucao(){
+        if(this.data_criacao.isBefore(LocalDate.now().minusDays(2))) return false;
+        return true;
+    }
+
     // Métodos sobrescritos
     @Override
     public Encomenda clone() {
