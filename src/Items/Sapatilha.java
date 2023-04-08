@@ -97,7 +97,7 @@ public class Sapatilha extends Artigo{
 
     public boolean validaDescontoSapatilha(){
         if((LocalDate.now().getYear()-this.getAno_colecao()<=0)) return false;
-        return this.tamanho > 45;
+        return this.getTamanho() > 45;
     }
 
     public void calculaDescontoSapatilha(){
