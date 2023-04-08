@@ -2,8 +2,12 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
 import Users.User;
+import Users.Buy;
+import Users.Sell;
 
 import static Users.User.*;
+import static Users.Buy.*;
+import static Users.Sell.*;
 
 public class UserSellerManager {
 
@@ -30,6 +34,7 @@ public class UserSellerManager {
                         if (loginUser(userEmail, usersList)) {
                             System.out.println("Logged in as user with email " + userEmail + "\n");
                             loggedIn = true;
+                            running = false;
                         } else {
                             System.out.println("Invalid user email. Please try again.");
                         }
@@ -37,8 +42,7 @@ public class UserSellerManager {
                     case 2:
                         userId = createUser(USERS_FILE);
                         System.out.println("User created with id " + userId + "\n");
-                        loggedIn = true;
-                        break;
+                        return;
                     default:
                         System.out.println("Invalid choice. Please try again.");
                         break;
@@ -49,11 +53,10 @@ public class UserSellerManager {
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-                    System.out.println("you bought");
+                    buyArticle();
                     break;
                 case 2:
-
-                    System.out.println("Select which article to sell: 1) Shoes, 2) T-Shirts or 3) Handbags:");
+                    sellArticle();
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");

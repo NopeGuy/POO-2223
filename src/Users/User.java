@@ -52,8 +52,8 @@ public class User {
                 String email = userData[2];
                 String morada = userData[3];
                 String nif = userData[4];
-                //String vendas = userData[5];
-                //String compras = userData[6];
+                String vendas = userData[5];
+                String compras = userData[6];
                 //mudar para ler depois a lista de artigos atraves da string
                 ArrayList<Artigo> vendeu = new ArrayList<>();
                 ArrayList<Artigo> comprou = new ArrayList<>();
@@ -122,7 +122,7 @@ public class User {
         return "U" + name + (int) (Math.random() * 1000);
     }
 
-    /*
+
     public static ArrayList<Artigo> convertToArrayList(String artigosVendidos) {
         ArrayList<Artigo> listaArtigos = new ArrayList<>();
         String[] arrayArtigos = artigosVendidos.split(";");
@@ -137,11 +137,11 @@ public class User {
             int num_donos = Integer.parseInt(dadosArtigo[6].trim());
             int stock = Integer.parseInt(dadosArtigo[7].trim());
             Artigo novoArtigo = new Artigo(descricao, marca, item_id, transportadora, preco, desconto, num_donos, stock);
-            listaArtigos.add(novoArtigo);
+            listaArtigos.add(novoArtigo.clone());
         }
         return listaArtigos;
     }
-*/
+
 
     public String getName() {
         return name;
