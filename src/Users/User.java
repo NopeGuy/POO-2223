@@ -1,8 +1,8 @@
 package Users;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class User {
     private String name;
@@ -26,6 +26,28 @@ public class User {
     }
 
 
+    public static ArrayList<User> readUsers(String USERS_FILE) {
+        ArrayList<User> usersList = new ArrayList<>();
+        try {
+            File file = new File(USERS_FILE);
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String data = scanner.nextLine();
+                String[] userData = data.split(",");
+                String name = userData[0];
+                String userId = userData[1];
+                String email = userData[2];
+                String nif = userData[3];
+                User user = new User(name, userId, email, nif);
+                usersList.add(user);
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return usersList;
+    }
 
     public static void writeUser(String USERS_FILE, User user) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(USERS_FILE, true))) {
@@ -74,12 +96,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", userId='" + userId + '\'' +
-                ", email='" + email + '\'' +
-                ", nif='" + nif + '\'' +
-                '}';
+        return name + "," + userId + "," + email + "," + nif;
     }
+
 }
 

@@ -1,13 +1,14 @@
 package Users;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Seller {
     private String name;
     private String sellerId;
     private String email;
+    private String address;
     private String nif;
 
 
@@ -26,6 +27,27 @@ public class Seller {
     }
 
 
+    public static ArrayList<Seller> readSellers(String filename) {
+        ArrayList<Seller> sellers = new ArrayList<Seller>();
+        try {
+            File file = new File(filename);
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] sellerInfo = line.split(",");
+                String name = sellerInfo[0];
+                String id = sellerInfo[1];
+                String email = sellerInfo[2];
+                String nif = sellerInfo[3];
+                Seller seller = new Seller(name, id, email, nif);
+                sellers.add(seller);
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + filename);
+        }
+        return sellers;
+    }
 
     public static void writeSeller(String SELLERS_FILE, Seller seller) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(SELLERS_FILE, true))) {
@@ -74,12 +96,8 @@ public class Seller {
 
     @Override
     public String toString() {
-        return "Seller{" +
-                "name='" + name + '\'' +
-                ", sellerId='" + sellerId + '\'' +
-                ", email='" + email + '\'' +
-                ", nif='" + nif + '\'' +
-                '}';
+        return name + "," + sellerId + "," + email + "," + nif;
     }
+
 }
 

@@ -4,7 +4,9 @@ import java.util.*;
 import Users.User;
 import Users.Seller;
 
+import static Users.Seller.readSellers;
 import static Users.Seller.writeSeller;
+import static Users.User.readUsers;
 import static Users.User.writeUser;
 
 public class UserSellerManager {
@@ -14,12 +16,11 @@ public class UserSellerManager {
 
     public static void main(String[] args) {
         //para testes
-        Seller bodaS = new Seller("Boda", "UBoda123", "boda@g.com", "123456789");
-        User bodaU = new User("Bodas", "SBoda132", "boda@g.com", "123456789");
-        ArrayList<Seller> sellerList = new ArrayList<Seller>();
-        ArrayList<User> usersList = new ArrayList<User>();
-        sellerList.add(bodaS);
-        usersList.add(bodaU);
+        //Seller bodaS = new Seller("Boda", "SBoda123", "boda@g.com", "123456789");
+        //User bodaU = new User("Bodas", "UBoda132", "boda@g.com", "123456789");
+        ArrayList<User> usersList = readUsers(USERS_FILE);
+        ArrayList<Seller> sellerList = readSellers(SELLERS_FILE);
+
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         while (running) {
@@ -29,14 +30,23 @@ public class UserSellerManager {
             System.out.println("3. Exit\n");
             int choice = scanner.nextInt();
             switch (choice) {
-                case 1 -> manageUsers(usersList);
-                case 2 -> manageSellers(sellerList);
-                case 3 -> running = false;
-                default -> System.out.println("Invalid choice. Please try again.");
+                case 1:
+                    manageUsers(usersList);
+                    break;
+                case 2:
+                    manageSellers(sellerList);
+                    break;
+                case 3:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
             }
         }
         scanner.close();
     }
+
 
     private static void manageUsers(List<User> userList) {
         Scanner scanner = new Scanner(System.in);
@@ -48,27 +58,30 @@ public class UserSellerManager {
             System.out.println("2. Create new user");
             int choice = scanner.nextInt();
             switch (choice) {
-                case 1 -> {
+                case 1:
                     System.out.println("Enter user ID:");
                     userId = scanner.next();
-                    if (loginUser(userList)) {
+                    if (loginUser(userId, userList)) {
                         System.out.println("Logged in as user with ID " + userId);
                         loggedIn = true;
                     } else {
                         System.out.println("Invalid user ID. Please try again.");
                     }
-                }
-                case 2 -> {
+                    break;
+                case 2:
                     userId = createUser();
-                    System.out.println("Users.User created with ID " + userId);
+                    System.out.println("User created with ID " + userId);
                     loggedIn = true;
-                }
-                default -> System.out.println("Invalid choice. Please try again.");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
             }
         }
         // do user management tasks here
         scanner.close();
     }
+
 
     private static void manageSellers(List<Seller> sellerList) {
         Scanner scanner = new Scanner(System.in);
@@ -83,7 +96,7 @@ public class UserSellerManager {
                 case 1:
                     System.out.println("Enter seller ID:");
                     sellerId = scanner.next();
-                    if (loginSeller(sellerList)) {
+                    if (loginSeller(sellerId, sellerList)) {
                         System.out.println("Logged in as seller with ID " + sellerId);
                         loggedIn = true;
                     } else {
@@ -124,48 +137,36 @@ public class UserSellerManager {
         System.out.println("Enter name:");
         String name = scanner.next();
         System.out.print("Enter email: ");
-        String email = scanner.nextLine();
-        System.out.print("Enter address: ");
-        String address = scanner.nextLine();
+        String email = scanner.next();
         System.out.print("Enter NIF: ");
-        String nif = scanner.nextLine();
-        String sellerId = User.generateUserId(name);
-        Seller seller = new Seller(name, email, address, nif);
+        String nif = scanner.next();
+        String sellerId = Seller.generateSellerId(name);
+        Seller seller = new Seller(name, sellerId, email, nif);
         writeSeller(SELLERS_FILE, seller);
         scanner.close();
         return sellerId;
     }
 
-    private static boolean loginUser(List<User> userList) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter user ID: ");
-        String userId = scanner.nextLine();
+    private static boolean loginUser(String userId, List<User> userList) {
 
         User user = findUserById(userList, userId);
 
         if (user == null) {
-            System.out.println("Users.User not found.");
+            return false;
         } else {
-            System.out.println("Logged in as: " + user.toString());
+            return true;
         }
-        return false;
     }
 
-    private static boolean loginSeller(List<Seller> sellerList) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter user ID: ");
-        String sellerId = scanner.nextLine();
+    private static boolean loginSeller(String sellerId, List<Seller> sellerList) {
 
         Seller seller = findSellerById(sellerList, sellerId);
 
         if (seller == null) {
-            System.out.println("Seller.seller not found.");
+            return false;
         } else {
-            System.out.println("Logged in as: " + seller.toString());
+            return true;
         }
-        return false;
     }
 
     private static User findUserById(List<? extends User> userList, String userId) {
