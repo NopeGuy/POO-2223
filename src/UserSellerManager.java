@@ -14,6 +14,7 @@ public class UserSellerManager {
         boolean running = true;
         while (running) {
             boolean loggedIn = false;
+            String userId = "";
             String userEmail = "";
             while (!loggedIn) {
                 System.out.println("\\Welcome to Vintagio/");
@@ -34,8 +35,8 @@ public class UserSellerManager {
                         }
                         break;
                     case 2:
-                        userEmail = createUser(USERS_FILE);
-                        System.out.println("User created with email " + userEmail + "\n");
+                        userId = createUser(USERS_FILE);
+                        System.out.println("User created with id " + userId + "\n");
                         loggedIn = true;
                         break;
                     default:
@@ -43,9 +44,22 @@ public class UserSellerManager {
                         break;
                 }
             }
-            scanner.close();
             // do user management tasks here
+            System.out.println("Welcome to the shop, here to 1)buy or 2)sell?");
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("you bought");
+                    break;
+                case 2:
 
+                    System.out.println("Select which article to sell: 1) Shoes, 2) T-Shirts or 3) Handbags:");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+            scanner.close();
         }
     }
 }
