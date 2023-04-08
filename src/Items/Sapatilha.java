@@ -1,10 +1,12 @@
 package Items;
 
+import java.time.LocalDate;
+
 public class Sapatilha extends Artigo{
     private int tamanho;
     private boolean atacadores;
     private String cor;
-    private int ano_coleção; //só há uma por ano por isso não é preciso por local date time
+    private int ano_colecao;
 
 
 
@@ -14,7 +16,7 @@ public class Sapatilha extends Artigo{
         this.tamanho = -1;
         this.atacadores = false;
         this.cor = "";
-        this.ano_coleção = -1;
+        this.ano_colecao = 0;
     }
 
     public Sapatilha(Sapatilha sapatilha){
@@ -22,15 +24,15 @@ public class Sapatilha extends Artigo{
         this.tamanho = sapatilha.getTamanho();
         this.atacadores = sapatilha.isAtacadores();
         this.cor = sapatilha.getCor();
-        this.ano_coleção = sapatilha.getAno_coleção();
+        this.ano_colecao = sapatilha.getAno_colecao();
     }
 
-    public Sapatilha(String descricao, String marca, String item_id,String transportadora, double preco, double desconto, int num_donos,int stock, int tamanho, boolean atacadores, String cor, int ano_coleção) {
+    public Sapatilha(String descricao, String marca, String item_id,String transportadora, double preco, double desconto, int num_donos,int stock, int tamanho, boolean atacadores, String cor, int ano_colecao) {
         super(descricao, marca, item_id,transportadora, preco, desconto, num_donos,stock);
         this.tamanho = tamanho;
         this.atacadores = atacadores;
         this.cor = cor;
-        this.ano_coleção = ano_coleção;
+        this.ano_colecao = ano_colecao;
     }
 
     //getters
@@ -46,8 +48,8 @@ public class Sapatilha extends Artigo{
         return cor;
     }
 
-    public int getAno_coleção() {
-        return ano_coleção;
+    public int getAno_colecao() {
+        return ano_colecao;
     }
 
     //setters
@@ -64,8 +66,8 @@ public class Sapatilha extends Artigo{
         this.cor = cor;
     }
 
-    public void setAno_coleção(int ano_coleção) {
-        this.ano_coleção = ano_coleção;
+    public void setAno_colecao(int ano_colecao) {
+        this.ano_colecao = ano_colecao;
     }
 
 
@@ -78,7 +80,7 @@ public class Sapatilha extends Artigo{
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Sapatilha: ").append(super.toString()).append("Tamanho: ").append(this.tamanho).append("Atacadores: ").append(this.atacadores).append("Cor: ").append(this.cor).append("Ano da coleção: ").append(this.ano_coleção);
+        sb.append("Sapatilha: ").append(super.toString()).append("Tamanho: ").append(this.tamanho).append("Atacadores: ").append(this.atacadores).append("Cor: ").append(this.cor).append("Ano da colecao: ").append(this.ano_colecao);
         return sb.toString();
     }
 
@@ -88,10 +90,23 @@ public class Sapatilha extends Artigo{
         if(this == o) return true;
         if((o == null) || (this.getClass() != o.getClass())) return false;
         Sapatilha s = (Sapatilha) o;
-        return (super.equals(s) && this.tamanho == s.getTamanho() && this.atacadores == s.isAtacadores() && this.cor.equals(s.getCor()) && this.ano_coleção == s.getAno_coleção());
+        return (super.equals(s) && this.tamanho == s.getTamanho() && this.atacadores == s.isAtacadores() && this.cor.equals(s.getCor()) && this.ano_colecao == s.getAno_colecao());
     }
 
-    
+    //metodos desconto
+
+    public boolean validaDescontoSapatilha(){
+        if((LocalDate.now().getYear()-this.getAno_colecao()<=0)) return false;
+        return this.tamanho > 45;
+    }
+
+    public void calculaDescontoSapatilha(){
+        if(this.validaDescontoSapatilha()){
+        this.setDesconto((LocalDate.now().getYear()-this.getAno_colecao()));
+        }
+        else this.setDesconto(0);
+        this.setPreco(this.getPreco()*(1-this.getDesconto()/100));
+    }
 
     //há desconto se forem de um ano diferente do atual, ou tamanho > 45
     //preço sapatilha usada: precoBase − (precoBase/numeroDonos ∗ estadoU tilizacao)

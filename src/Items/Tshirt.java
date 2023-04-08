@@ -1,8 +1,10 @@
 package Items;
 
+
+
 public class Tshirt extends Artigo{
     private String tamanho;
-    private String padrão; //pode ser lisa, riscas ou palmeiras
+    private String padrao; //pode ser lisa, riscas ou palmeiras
 
     //Lisas nunca têm desconto, as restantes têm 50% de desconto se forem usadas
 
@@ -10,19 +12,19 @@ public class Tshirt extends Artigo{
     public Tshirt(){
         super();
         this.tamanho = "";
-        this.padrão = "";
+        this.padrao = "";
     }
 
     public Tshirt(Tshirt tshirt){
         super(tshirt);
         this.tamanho = tshirt.getTamanho();
-        this.padrão = tshirt.getPadrão();
+        this.padrao = tshirt.getpadrao();
     }
 
-    public Tshirt(String descricao, String marca, String item_id,String transportadora, double preco, double desconto, int num_donos,int stock, String tamanho, String padrão) {
+    public Tshirt(String descricao, String marca, String item_id,String transportadora, double preco, double desconto, int num_donos,int stock, String tamanho, String padrao) {
         super(descricao, marca, item_id,transportadora, preco, desconto, num_donos, stock);
         this.tamanho = tamanho;
-        this.padrão = padrão;
+        this.padrao = padrao;
     }
 
     //getters
@@ -31,8 +33,8 @@ public class Tshirt extends Artigo{
         return tamanho;
     }
 
-    public String getPadrão() {
-        return padrão;
+    public String getpadrao() {
+        return padrao;
     }
 
     //setters
@@ -41,8 +43,8 @@ public class Tshirt extends Artigo{
         this.tamanho = tamanho;
     }
 
-    public void setPadrão(String padrão) {
-        this.padrão = padrão;
+    public void setpadrao(String padrao) {
+        this.padrao = padrao;
     }
 
     //clone
@@ -56,7 +58,7 @@ public class Tshirt extends Artigo{
         StringBuilder sb = new StringBuilder();
         sb.append("Tshirt{");
         sb.append("tamanho=").append(this.tamanho);
-        sb.append(", padrão=").append(this.padrão);
+        sb.append(", padrao=").append(this.padrao);
         sb.append(", ").append(super.toString());
         sb.append("}");
         return sb.toString();
@@ -68,10 +70,17 @@ public class Tshirt extends Artigo{
         if(this == o) return true;
         if((o == null) || (this.getClass() != o.getClass())) return false;
         Tshirt tshirt = (Tshirt) o;
-        return (super.equals(tshirt) && this.tamanho.equals(tshirt.getTamanho()) && this.padrão.equals(tshirt.getPadrão()));
+        return (super.equals(tshirt) && this.tamanho.equals(tshirt.getTamanho()) && this.padrao.equals(tshirt.getpadrao()));
     }
 
+    //metodo desconto
 
-
+    public void calculaPrecoTshirt() {
+        if (this.getNum_donos() > 0) {
+            if (this.padrao.equals("lisa")) this.setDesconto(0);
+            else this.setDesconto(50);
+            this.setPreco(this.getPreco() * (1 - this.getDesconto() / 100));
+        }
+    }
 
 }
