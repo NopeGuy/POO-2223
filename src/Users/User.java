@@ -2,6 +2,7 @@ package Users;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class User {
@@ -56,6 +57,42 @@ public class User {
         } catch (IOException e) {
             System.out.println("Failed to save user to file.");
         }
+    }
+
+    public static String createUser(String USERS_FILE) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter name:");
+        String name = scanner.nextLine();
+        System.out.println("Enter email:");
+        String email = scanner.nextLine();
+        System.out.println("Enter NIF:");
+        String nif = scanner.nextLine();
+        String userId = User.generateUserId(name);
+        User user = new User(name, userId, email, nif);
+        writeUser(USERS_FILE, user);
+        scanner.close();
+        return userId;
+    }
+
+
+    public static boolean loginUser(String userEmail, List<User> userList) {
+
+        User user = findUserByEmail(userList, userEmail);
+
+        if (user == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private static User findUserByEmail(List<? extends User> userList, String userEmail) {
+        for (User user : userList) {
+            if (user.getEmail().equals(userEmail)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public static String generateUserId(String name) {
