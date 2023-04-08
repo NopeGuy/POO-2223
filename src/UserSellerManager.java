@@ -3,6 +3,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 import Users.User;
 import Users.Seller;
+import Store.UserStore;
 
 import static Users.Seller.readSellers;
 import static Users.Seller.writeSeller;
@@ -62,7 +63,7 @@ public class UserSellerManager {
                     System.out.println("Enter user ID:");
                     userId = scanner.next();
                     if (loginUser(userId, userList)) {
-                        System.out.println("Logged in as user with ID " + userId);
+                        System.out.println("Logged in as user with ID " + userId + "\n");
                         loggedIn = true;
                     } else {
                         System.out.println("Invalid user ID. Please try again.");
@@ -70,7 +71,7 @@ public class UserSellerManager {
                     break;
                 case 2:
                     userId = createUser();
-                    System.out.println("User created with ID " + userId);
+                    System.out.println("User created with ID " + userId + "\n");
                     loggedIn = true;
                     break;
                 default:
@@ -78,9 +79,11 @@ public class UserSellerManager {
                     break;
             }
         }
+
         // do user management tasks here
         scanner.close();
     }
+
 
 
     private static void manageSellers(List<Seller> sellerList) {
@@ -97,7 +100,7 @@ public class UserSellerManager {
                     System.out.println("Enter seller ID:");
                     sellerId = scanner.next();
                     if (loginSeller(sellerId, sellerList)) {
-                        System.out.println("Logged in as seller with ID " + sellerId);
+                        System.out.println("Logged in as seller with ID " + sellerId + "\n");
                         loggedIn = true;
                     } else {
                         System.out.println("Invalid seller ID. Please try again.");
@@ -105,7 +108,7 @@ public class UserSellerManager {
                     break;
                 case 2:
                     sellerId = createSeller();
-                    System.out.println("Seller created with ID " + sellerId);
+                    System.out.println("Seller created with ID " + sellerId + "\n");
                     loggedIn = true;
                     break;
                 default:
