@@ -11,7 +11,7 @@ import java.util.Scanner;
 import static Users.User.*;
 
 public class Sell {
-    public static void sellArticle() {
+    public static void sellArticle(String userEmail) {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
         while(running) {

@@ -36,7 +36,7 @@ public class UserSellerManager {
                             loggedIn = true;
                             running = false;
                         } else {
-                            System.out.println("Invalid user email. Please try again.");
+                            System.out.println("Invalid user email. Please try again.\n");
                         }
                         break;
                     case 2:
@@ -53,10 +53,10 @@ public class UserSellerManager {
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-                    buyArticle();
+                    buyArticle(userEmail);
                     break;
                 case 2:
-                    sellArticle();
+                    sellArticle(userEmail);
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");

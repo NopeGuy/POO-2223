@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Buy {
-    public static void buyArticle() {
+    public static void buyArticle(String userEmail) {
         System.out.println("Select what to buy:");
     }
 }
