@@ -1,0 +1,2 @@
+lu@mailTshirt:Adibos:TN3:UPS:100.0:1.0:0:1:L:palm trees,
+lu@mail:Shoe:niko:SN3:UPS:1000000.0:3.0:0:1:38:false:black:3018,

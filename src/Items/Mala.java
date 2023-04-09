@@ -134,7 +134,7 @@ public class Mala extends Artigo {
                 transportadora = "CTT";
                 break;
             case 3:
-                transportadora = "DPD";
+                transportadora = "UPS";
                 break;
             default:
                 System.out.println("Invalid dimension. Setting to GLS.");
@@ -213,4 +213,13 @@ public class Mala extends Artigo {
         }
     }
 
+    public static void printHandbagToFileHistory(String userEmail, Mala mala, String filename) {
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
+            writer.println(userEmail + ":" + mala.toString2() + ",");
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Failed to print Handbag to file history.");
+        }
+    }
 }

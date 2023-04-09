@@ -140,7 +140,7 @@ public class Sapatilha extends Artigo{
                 transportadora = "CTT";
                 break;
             case 3:
-                transportadora = "DPD";
+                transportadora = "UPS";
                 break;
             default:
                 System.out.println("Invalid dimension. Setting to GLS.");
@@ -173,7 +173,7 @@ public class Sapatilha extends Artigo{
         int atacadores = Integer.parseInt(scanner.nextLine().trim());
         if(atacadores == 2){ atacadoresBool = false;}
 
-        System.out.print("Enter shoe color: ");
+        System.out.print("Enter shoe color(lower case only): ");
         String cor = scanner.nextLine().trim();
 
         System.out.print("Enter year of collection: ");
@@ -191,6 +191,15 @@ public class Sapatilha extends Artigo{
             writer.close();
         } catch (IOException e) {
             System.out.println("Failed to print Shoe to file.");
+        }
+    }
+    public static void printShoetoFileHistory(String userEmail, Sapatilha sapatilha, String filename) {
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
+            writer.println(userEmail + ":" + sapatilha.toString2() + ",");
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Failed to print Shoe to file history.");
         }
     }
 }

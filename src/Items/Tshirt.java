@@ -113,7 +113,7 @@ public class Tshirt extends Artigo{
                 transportadora = "CTT";
                 break;
             case 3:
-                transportadora = "DPD";
+                transportadora = "UPS";
                 break;
             default:
                 System.out.println("Invalid dimension. Setting to GLS.");
@@ -189,6 +189,16 @@ public class Tshirt extends Artigo{
             writer.close();
         } catch (IOException e) {
             System.out.println("Failed to print T-Shirt to file.");
+        }
+    }
+
+    public static void printTshirtToFileHistory(String userEmail, Tshirt tshirt, String filename) {
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
+            writer.println(userEmail + ":" + tshirt.toString2() + ",");
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Failed to print T-Shirt to file history.");
         }
     }
 }
