@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import static Items.Mala.printHandbagToFile;
 import static Items.Sapatilha.printShoeToFile;
+import static Items.Tshirt.printTshirtToFile;
 import static Users.User.*;
 
 public class Sell {
@@ -41,9 +42,8 @@ public class Sell {
                     printPremiumHandbagToFile(nova4, ARTICLES_FILE); */
                     break;
                 case 5:
-                    /*
                     Tshirt nova5 = Tshirt.createTshirt();
-                    printTshirtToFile(nova5, ARTICLES_FILE); */
+                    printTshirtToFile(nova5, ARTICLES_FILE);
                     break;
                 case 0:
 

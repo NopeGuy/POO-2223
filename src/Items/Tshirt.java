@@ -1,6 +1,10 @@
 package Items;
 
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class Tshirt extends Artigo{
     private String tamanho;
@@ -64,6 +68,9 @@ public class Tshirt extends Artigo{
         return sb.toString();
     }
 
+    public String toString2(){
+        return super.toString2() + ":" + this.tamanho + ":" + this.padrao;
+    }
     //equasls
 
     public boolean equals(Object o){
@@ -83,4 +90,105 @@ public class Tshirt extends Artigo{
         }
     }
 
+    public static Tshirt createTshirt() {
+        Scanner scanner = new Scanner(System.in);
+
+        String itemId = "TN" + (int) (Math.random() * 1000);
+        System.out.print("Item ID will be: " + itemId + "\n");
+
+        System.out.print("Enter t-shirt description: ");
+        String descricao = scanner.nextLine().trim();
+
+        System.out.print("Enter t-shirt brand: ");
+        String marca = scanner.nextLine().trim();
+
+        System.out.print("Enter transport company name: 1)GLS, 2)CTT, 3)DPD: ");
+        int choice = Integer.parseInt(scanner.nextLine().trim());
+        String transportadora = "";
+        switch (choice) {
+            case 1:
+                transportadora = "GLS";
+                break;
+            case 2:
+                transportadora = "CTT";
+                break;
+            case 3:
+                transportadora = "DPD";
+                break;
+            default:
+                System.out.println("Invalid dimension. Setting to GLS.");
+                transportadora = "GLS";
+                break;
+        }
+
+        System.out.print("Enter price: ");
+        double preco = Double.parseDouble(scanner.nextLine().trim());
+
+        System.out.print("Enter discount: ");
+        double desconto = Double.parseDouble(scanner.nextLine().trim());
+
+        System.out.print("Enter number of previous owners: ");
+        int numDonos = Integer.parseInt(scanner.nextLine().trim());
+
+        System.out.print("Enter stock: ");
+        int stock = Integer.parseInt(scanner.nextLine().trim());
+        while(stock == 0){
+            System.out.println("Stock can't be 0");
+            System.out.print("Enter stock: ");
+            stock = Integer.parseInt(scanner.nextLine().trim());
+        }
+
+        System.out.print("Enter a shirt size: 1)S, 2)M, 3)L, 4)XL: ");
+        choice = Integer.parseInt(scanner.nextLine().trim());
+        String tamanho = "";
+        switch (choice) {
+            case 1:
+                tamanho = "S";
+                break;
+            case 2:
+                tamanho = "M";
+                break;
+            case 3:
+                tamanho = "L";
+                break;
+            case 4:
+                tamanho = "XL";
+                break;
+            default:
+                System.out.println("Invalid dimension. Setting to M.");
+                tamanho = "M";
+                break;
+        }
+
+        System.out.print("Enter a shirt pattern: 1)plain, 2)stripes, 3)palm trees: ");
+        choice = Integer.parseInt(scanner.nextLine().trim());
+        String padrao = "";
+        switch (choice) {
+            case 1:
+                padrao = "plain";
+                break;
+            case 2:
+                padrao = "stripes";
+                break;
+            case 3:
+                padrao = "palm trees";
+                break;
+            default:
+                System.out.println("Invalid input. Setting to plain.");
+                tamanho = "plain";
+                break;
+        }
+
+        return new Tshirt(descricao, marca, itemId, transportadora, preco, desconto, numDonos, stock, tamanho, padrao);
+    }
+
+    public static void printTshirtToFile(Tshirt tshirt, String filename) {
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
+            writer.println(tshirt.toString2() + ",");
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Failed to print T-Shirt to file.");
+        }
+    }
 }
