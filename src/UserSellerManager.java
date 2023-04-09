@@ -56,10 +56,10 @@ public class UserSellerManager {
                     sellArticle(userEmail);
                     break;
                 case 3:
-
+                    Purchases.printUserSales(userEmail, "buyhistory.txt");
                     break;
                 case 4:
-                    Purchases.printUserSales(userEmail);
+                    Purchases.printUserSales(userEmail, "sellhistory.txt");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");

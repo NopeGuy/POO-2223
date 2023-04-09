@@ -1,3 +1,5 @@
 lu@mail:Tshirt:Adibos:TN300000:UPS:100.0:1.0:0:1:L:palm trees,
 lu@mail:Shoe:niko:SN312000:UPS:1000000.0:3.0:0:1:38:false:black:3018,
 josemariapirilau@gmail.com:Sou drogado:Da feira:TN767000:CTT:69.69:0.0:1:1:XL:plain,
+josemariapirilau@gmail.com:A really nice show:abibas:SN69846:UPS:20000.0:0.0:30:3:53:true:yellow:2050,
+josemariapirilau@gmail.com:a tshirt do sequeira que cheira a cavalo:cavalo:TN20903:CTT:1.0E8:0.0:1:1:M:palm trees,

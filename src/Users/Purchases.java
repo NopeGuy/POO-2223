@@ -1,23 +1,24 @@
 package Users;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Purchases {
-    public static void printUserSales(String email) {
-        String SELL_FILE = "sellhistory.txt";
-        String BUY_FILE = "buyhistory.txt";
+    public static void printUserSales(String email, String FILE) {
 
         try {
-            Scanner scanner = new Scanner(new File(SELL_FILE));
+            Scanner scanner = new Scanner(new File(FILE));
+            String itemType = "";
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] values = line.split(":");
 
                 if (values[0].equals(email)) {
-                    String itemType = values[3].substring(0, 2);
+                    itemType = values[3].substring(0, 2);
 
                     switch (itemType) {
                         case "TN":
@@ -44,9 +45,10 @@ public class Purchases {
                     }
                 }
             }
+            if (itemType.equals("")){System.out.println("No items found.");}
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + SELL_FILE);
+            System.out.println("File not found: " + FILE);
         }
     }
 
@@ -103,4 +105,57 @@ public class Purchases {
             }
         }
     }
+    public static void removeItemFromUserStock(String userEmail, String itemId) {
+        File folder = new File("stock/");
+        String BUY_FILE = "buyhistory.txt";
+        File[] files = folder.listFiles();
+
+        for (File file : files) {
+            if (file.getName().endsWith(".txt")) {
+                try {
+                    List<String> lines = new ArrayList<>();
+                    Scanner scanner = new Scanner(file);
+
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine();
+                        String[] values = line.split(":");
+
+                        if (values[2].equals(itemId)) {
+                            int stock = Integer.parseInt(values[7]);
+
+                            if (stock == 1) {
+                                continue; // skip this line
+                            } else {
+                                stock--;
+                                values[7] = Integer.toString(stock);
+                                line = String.join(":", values);
+                            }
+
+                            // add the modified line to the buy history
+                            FileWriter buyWriter = new FileWriter(BUY_FILE, true);
+                            String buyLine = userEmail + ":" + line + "\n";
+                            buyWriter.write(buyLine);
+                            buyWriter.close();
+                        }
+
+                        lines.add(line);
+                    }
+
+                    scanner.close();
+
+                    FileWriter writer = new FileWriter(file);
+
+                    for (String line : lines) {
+                        writer.write(line + "\n");
+                    }
+
+                    writer.close();
+                } catch (IOException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
+        }
+    }
+
+
 }

@@ -18,6 +18,7 @@ import static Items.Sapatilha.printShoetoFileHistory;
 import static Items.Tshirt.printTshirtToFile;
 import static Items.Tshirt.printTshirtToFileHistory;
 import static Users.Purchases.printAllSalesExceptUser;
+import static Users.Purchases.removeItemFromUserStock;
 
 public class Buy {
     public static void buyArticle(String userEmail) {
@@ -33,7 +34,9 @@ public class Buy {
                     printAllSalesExceptUser(userEmail);
                     break;
                 case 2:
-
+                    System.out.println("Select the item you want to buy by typing the id: ");
+                    String itemId = scanner.next();
+                    removeItemFromUserStock(userEmail, itemId);
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
