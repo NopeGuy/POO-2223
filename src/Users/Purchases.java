@@ -131,7 +131,6 @@ public class Purchases {
                                 line = String.join(":", values);
                             }
 
-                            // add the modified line to the buy history
                             FileWriter buyWriter = new FileWriter(BUY_FILE, true);
                             String buyLine = userEmail + ":" + line + "\n";
                             buyWriter.write(buyLine);
