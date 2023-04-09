@@ -17,6 +17,7 @@ import static Items.Sapatilha.printShoeToFile;
 import static Items.Sapatilha.printShoetoFileHistory;
 import static Items.Tshirt.printTshirtToFile;
 import static Items.Tshirt.printTshirtToFileHistory;
+import static Users.Purchases.printAllSalesExceptUser;
 
 public class Buy {
     public static void buyArticle(String userEmail) {
@@ -29,7 +30,7 @@ public class Buy {
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-
+                    printAllSalesExceptUser(userEmail);
                     break;
                 case 2:
 

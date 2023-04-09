@@ -1,9 +1,7 @@
-import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
+
+import Users.Purchases;
 import Users.User;
-import Users.Buy;
-import Users.Sell;
 
 import static Users.User.*;
 import static Users.Buy.*;
