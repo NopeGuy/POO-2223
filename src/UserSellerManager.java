@@ -48,8 +48,7 @@ public class UserSellerManager {
                         break;
                 }
             }
-            // do user management tasks here
-            System.out.println("Welcome to the shop, here to 1)buy or 2)sell?");
+            System.out.println("Welcome to the shop, here to 1)buy, 2)sell, 3)buy history, 4)sell history: ");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -57,6 +56,12 @@ public class UserSellerManager {
                     break;
                 case 2:
                     sellArticle(userEmail);
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+                    Purchases.printUserSales(userEmail);
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");

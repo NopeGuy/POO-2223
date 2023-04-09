@@ -35,7 +35,8 @@ public class Sell {
                 case 2:
                     /*
                     SapatilhaPremium nova2 = SapatilhaPremium.createPremiumShoe();
-                    printPremiumShoeToFile(nova2, ARTICLES_FILE); */
+                    printPremiumShoeToFile(nova2, ARTICLES_FILE);
+                    printPremiumShoetoFileHistory(userEmail, nova1, SELL_FILE);*/
                     break;
                 case 3:
                    Mala nova3 = Mala.createHandbag();
@@ -45,7 +46,8 @@ public class Sell {
                 case 4:
                     /*
                     MalaPremium nova4 = MalaPremium.createPremiumHandbag();
-                    printPremiumHandbagToFile(nova4, ARTICLES_FILE); */
+                    printPremiumHandbagToFile(nova4, ARTICLES_FILE);
+                    printPremiumHandbagToFileHistory(userEmail, nova3, SELL_FILE);*/
                     break;
                 case 5:
                     Tshirt nova5 = Tshirt.createTshirt();

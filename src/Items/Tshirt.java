@@ -93,7 +93,7 @@ public class Tshirt extends Artigo{
     public static Tshirt createTshirt() {
         Scanner scanner = new Scanner(System.in);
 
-        String itemId = "TN" + (int) (Math.random() * 1000);
+        String itemId = "TN" + (int) (Math.random() * 100000);
         System.out.print("Item ID will be: " + itemId + "\n");
 
         System.out.print("Enter t-shirt description: ");

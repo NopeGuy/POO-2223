@@ -114,7 +114,7 @@ public class Mala extends Artigo {
     public static Mala createHandbag() {
         Scanner scanner = new Scanner(System.in);
 
-        String itemId = "HN" + (int) (Math.random() * 1000);
+        String itemId = "HN" + (int) (Math.random() * 100000);
         System.out.print("Item ID will be: " + itemId+ "\n");
 
         System.out.print("Enter handbag description: ");

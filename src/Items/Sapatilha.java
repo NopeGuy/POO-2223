@@ -120,7 +120,7 @@ public class Sapatilha extends Artigo{
     public static Sapatilha createShoe() {
         Scanner scanner = new Scanner(System.in);
 
-        String itemId = "SN" + (int) (Math.random() * 1000);
+        String itemId = "SN" + (int) (Math.random() * 100000);
         System.out.print("Item ID will be: " + itemId + "\n");
 
         System.out.print("Enter shoe description: ");
