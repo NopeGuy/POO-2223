@@ -14,7 +14,6 @@ public class User {
     private String email;
     private String morada;
     private String nif;
-    private List<Artigo> artigos;
     private List<Artigo> vendeu;
     private List<Artigo> comprou;
 
@@ -25,18 +24,16 @@ public class User {
         this.email = "";
         this.morada = "";
         this.nif = "";
-        this.artigos = new ArrayList<>();
         this.vendeu = new ArrayList<>();
         this.comprou = new ArrayList<>();
     }
 
-    public User(String name, String userId, String email, String morada, String nif, List<Artigo> artigos, List<Artigo> vendeu, List<Artigo> comprou) {
+    public User(String name, String userId, String email, String morada, String nif, List<Artigo> vendeu, List<Artigo> comprou) {
         this.name = name;
         this.userId = userId;
         this.email = email;
         this.morada = morada;
         this.nif = nif;
-        this.artigos = artigos;
         this.vendeu = vendeu;
         this.comprou = comprou;
     }
@@ -55,15 +52,13 @@ public class User {
                 String email = userData[2];
                 String morada = userData[3];
                 String nif = userData[4];
-                String stock = userData[5];
-                String vendas = userData[6];
-                String compras = userData[7];
+                String vendas = userData[5];
+                String compras = userData[6];
                 //mudar para ler depois a lista de artigos atraves da string
-                ArrayList<Artigo> artigos = new ArrayList<>();
                 ArrayList<Artigo> vendeu = new ArrayList<>();
                 ArrayList<Artigo> comprou = new ArrayList<>();
                 //passar String para lista de artigos
-                User user = new User(name, userId, email, morada, nif, artigos, vendeu, comprou);
+                User user = new User(name, userId, email, morada, nif, vendeu, comprou);
                 usersList.add(user);
             }
             scanner.close();
@@ -97,7 +92,7 @@ public class User {
         ArrayList<Artigo> vendeu = new ArrayList<>();
         ArrayList<Artigo> comprou = new ArrayList<>();
         String userId = User.generateUserId(name);
-        User user = new User(name, userId, email, morada, nif, artigos, vendeu, comprou);
+        User user = new User(name, userId, email, morada, nif, vendeu, comprou);
         writeUser(USERS_FILE, user);
         scanner.close();
         return userId;
@@ -127,27 +122,6 @@ public class User {
     public static String generateUserId(String name) {
         return "U" + name + (int) (Math.random() * 1000);
     }
-
-
-    public static ArrayList<Artigo> convertToArrayList(String artigosVendidos) {
-        ArrayList<Artigo> listaArtigos = new ArrayList<>();
-        String[] arrayArtigos = artigosVendidos.split(";");
-        for (String artigo : arrayArtigos) {
-            String[] dadosArtigo = artigo.split(",");
-            String descricao = dadosArtigo[0].trim();
-            String marca = dadosArtigo[1].trim();
-            String item_id = dadosArtigo[2].trim();
-            String transportadora = dadosArtigo[3].trim();
-            double preco = Double.parseDouble(dadosArtigo[4].trim());
-            double desconto = Double.parseDouble(dadosArtigo[5].trim());
-            int num_donos = Integer.parseInt(dadosArtigo[6].trim());
-            int stock = Integer.parseInt(dadosArtigo[7].trim());
-            Artigo novoArtigo = new Artigo(descricao, marca, item_id, transportadora, preco, desconto, num_donos, stock);
-            listaArtigos.add(novoArtigo.clone());
-        }
-        return listaArtigos;
-    }
-
 
     public String getName() {
         return name;
@@ -185,10 +159,6 @@ public class User {
     @Override
     public User clone() throws CloneNotSupportedException {
         User clone = (User) super.clone();
-        List<Artigo> clonedArtigos = new ArrayList<>();
-        for (Artigo artigo : this.artigos) {
-            clonedArtigos.add(artigo.clone());
-        }
         List<Artigo> clonedVendeu = new ArrayList<>();
         for (Artigo artigo : this.vendeu) {
             clonedVendeu.add(artigo.clone());
@@ -197,7 +167,7 @@ public class User {
         for (Artigo artigo : this.comprou) {
             clonedComprou.add(artigo.clone());
         }
-        return new User(this.name, this.userId, this.email, this.morada, this.nif, clonedArtigos, clonedVendeu, clonedComprou);
+        return new User(this.name, this.userId, this.email, this.morada, this.nif, clonedVendeu, clonedComprou);
     }
 
 
@@ -211,14 +181,13 @@ public class User {
                 Objects.equals(email, u.email) &&
                 Objects.equals(morada, u.morada) &&
                 Objects.equals(nif, u.nif) &&
-                Objects.equals(artigos, u.artigos) &&
                 Objects.equals(vendeu, u.vendeu) &&
                 Objects.equals(comprou, u.comprou);
     }
 
     @Override
     public String toString() {
-        return name + "," + userId + "," + email + "," + morada + "," + nif + "," + artigos + ',' + vendeu + "," + comprou;}
+        return name + "," + userId + "," + email + "," + morada + "," + nif + "," + vendeu + "," + comprou;}
     }
 
 

@@ -139,4 +139,7 @@ public class Artigo {
                 '}';
     }
 
+    public String toString2(){
+        return  descricao + ":" + marca + ':' + item_id + ':' + transportadora + ':' + preco + ':' + desconto + ':' + num_donos + ':' + stock;
+    }
 }

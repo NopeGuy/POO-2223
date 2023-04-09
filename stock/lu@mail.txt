@@ -1,0 +1,4 @@
+Great leather bitton:Lous Bittoin:HN193423:GLS:100000.0:10.0:1:1:medium:2000:leather,
+asd:asd:HNasd:asd:123.0:1.0:0:1:medium:2000:pvc,
+asd:asd:SNasd:asd:100.0:1.0:0:1:36:false:Green:2000,
+adibas bowlin:abibas:SN12034:GLS:2000.0:2.0:0:1:34:true:Blue:2000,

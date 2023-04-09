@@ -1,6 +1,10 @@
 package Items;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Mala extends Artigo {
     private String dimensao; //pode ser pequena média ou grande
@@ -71,6 +75,9 @@ public class Mala extends Artigo {
         return sb.toString();
     }
 
+    public String toString2(){
+        return super.toString2() + ":" + this.dimensao + ":" + this.ano_colecao + ":" + this.material;
+    }
     //equals
 
     public boolean equals(Object o){
@@ -88,11 +95,11 @@ public class Mala extends Artigo {
         double dDim,dAno,dMat;
         if(this.getNum_donos()>0) {
             dAno=(LocalDate.now().getYear()-this.getAno_colecao());
-            if (this.getDimensao().equals("pequena")) dDim=20;
-            else if (this.getDimensao().equals("media")) dDim=10;
+            if (this.getDimensao().equals("small")) dDim=20;
+            else if (this.getDimensao().equals("medium")) dDim=10;
             else dDim=0;
-            if(this.getMaterial().equals("couro falso")) dMat=20;
-            else if(this.getMaterial().equals("couro cigano")) dMat=10;
+            if(this.getMaterial().equals("pvc")) dMat=20;
+            else if(this.getMaterial().equals("fake leather")) dMat=10;
             else dMat=0;
             this.setDesconto(dAno*2+dDim+dMat);
         }
@@ -103,4 +110,107 @@ public class Mala extends Artigo {
         if(this.getDesconto()>=100) this.setPreco(0);
         else this.setPreco(this.getPreco()*(1-this.getDesconto()/100));
     }
+
+    public static Mala createHandbag() {
+        Scanner scanner = new Scanner(System.in);
+
+        String itemId = "HN" + (int) (Math.random() * 1000);
+        System.out.print("Item ID will be: " + itemId+ "\n");
+
+        System.out.print("Enter handbag description: ");
+        String descricao = scanner.nextLine().trim();
+
+        System.out.print("Enter handbag brand: ");
+        String marca = scanner.nextLine().trim();
+
+        System.out.print("Enter transport company name: 1)GLS, 2)CTT, 3)DPD: ");
+        int choice = Integer.parseInt(scanner.nextLine().trim());
+        String transportadora = "";
+        switch (choice) {
+            case 1:
+                transportadora = "GLS";
+                break;
+            case 2:
+                transportadora = "CTT";
+                break;
+            case 3:
+                transportadora = "DPD";
+                break;
+            default:
+                System.out.println("Invalid dimension. Setting to GLS.");
+                transportadora = "GLS";
+                break;
+        }
+
+        System.out.print("Enter price: ");
+        double preco = Double.parseDouble(scanner.nextLine().trim());
+
+        System.out.print("Enter discount: ");
+        double desconto = Double.parseDouble(scanner.nextLine().trim());
+
+        System.out.print("Enter number of previous owners: ");
+        int numDonos = Integer.parseInt(scanner.nextLine().trim());
+
+        System.out.print("Enter stock: ");
+        int stock = Integer.parseInt(scanner.nextLine().trim());
+        while(stock == 0){
+            System.out.println("Stock can't be 0");
+            System.out.print("Enter stock: ");
+            stock = Integer.parseInt(scanner.nextLine().trim());
+        }
+
+        System.out.print("Enter dimension: 1)small 2)medium 3)large: ");
+        choice = Integer.parseInt(scanner.nextLine().trim());
+        String dimensao = "";
+        switch (choice) {
+            case 1:
+                dimensao = "small";
+                break;
+            case 2:
+                dimensao = "medium";
+                break;
+            case 3:
+                dimensao = "large";
+                break;
+            default:
+                System.out.println("Invalid dimension. Setting to small.");
+                dimensao = "small";
+                break;
+        }
+
+        System.out.print("Enter year of collection: ");
+        int anoColecao = Integer.parseInt(scanner.nextLine().trim());
+
+        System.out.print("Enter material: 1)pvc 2)fake leather 3)leather: ");
+        choice = Integer.parseInt(scanner.nextLine().trim());
+        String material = "";
+        switch (choice) {
+            case 1:
+                material = "pvc";
+                break;
+            case 2:
+                material = "fake leather";
+                break;
+            case 3:
+                material = "leather";
+                break;
+            default:
+                System.out.println("Invalid dimension. Setting to pvc.");
+                material = "pvc";
+                break;
+        }
+
+        return new Mala(descricao, marca, itemId, transportadora, preco, desconto, numDonos, stock, dimensao, anoColecao, material);
+    }
+
+    public static void printHandbagToFile(Mala mala, String filename) {
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
+            writer.println(mala.toString2() + ",");
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Failed to print Handbag to file.");
+        }
+    }
+
 }

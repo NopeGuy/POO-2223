@@ -1,6 +1,10 @@
 package Items;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Sapatilha extends Artigo{
     private int tamanho;
@@ -83,7 +87,9 @@ public class Sapatilha extends Artigo{
         sb.append("Sapatilha: ").append(super.toString()).append("Tamanho: ").append(this.tamanho).append("Atacadores: ").append(this.atacadores).append("Cor: ").append(this.cor).append("Ano da colecao: ").append(this.ano_colecao);
         return sb.toString();
     }
-
+    public String toString2(){
+        return super.toString2() + ":" + this.tamanho + ":" + this.atacadores + ":" + this.cor + ":" + this.ano_colecao;
+    }
     //equals
 
     public boolean equals(Object o){
@@ -111,6 +117,80 @@ public class Sapatilha extends Artigo{
     //há desconto se forem de um ano diferente do atual, ou tamanho > 45
     //preço sapatilha usada: precoBase − (precoBase/numeroDonos ∗ estadoU tilizacao)
 
+    public static Sapatilha createShoe() {
+        Scanner scanner = new Scanner(System.in);
+
+        String itemId = "SN" + (int) (Math.random() * 1000);
+        System.out.print("Item ID will be: " + itemId + "\n");
+
+        System.out.print("Enter shoe description: ");
+        String descricao = scanner.nextLine().trim();
+
+        System.out.print("Enter shoe brand: ");
+        String marca = scanner.nextLine().trim();
+
+        System.out.print("Enter transport company name: 1)GLS, 2)CTT, 3)DPD: ");
+        int choice = Integer.parseInt(scanner.nextLine().trim());
+        String transportadora = "";
+        switch (choice) {
+            case 1:
+                transportadora = "GLS";
+                break;
+            case 2:
+                transportadora = "CTT";
+                break;
+            case 3:
+                transportadora = "DPD";
+                break;
+            default:
+                System.out.println("Invalid dimension. Setting to GLS.");
+                transportadora = "GLS";
+                break;
+        }
+
+        System.out.print("Enter price: ");
+        double preco = Double.parseDouble(scanner.nextLine().trim());
+
+        System.out.print("Enter discount: ");
+        double desconto = Double.parseDouble(scanner.nextLine().trim());
+
+        System.out.print("Enter number of previous owners: ");
+        int numDonos = Integer.parseInt(scanner.nextLine().trim());
+
+        System.out.print("Enter stock: ");
+        int stock = Integer.parseInt(scanner.nextLine().trim());
+        while(stock == 0){
+            System.out.println("Stock can't be 0");
+            System.out.print("Enter stock: ");
+            stock = Integer.parseInt(scanner.nextLine().trim());
+        }
+
+        System.out.print("Enter shoe size: ");
+        int tamanho = Integer.parseInt(scanner.nextLine().trim());
+
+        System.out.print("Enter shoe laces 1)Has 2)Doesn't has them: ");
+        boolean atacadoresBool = true;
+        int atacadores = Integer.parseInt(scanner.nextLine().trim());
+        if(atacadores == 2){ atacadoresBool = false;}
+
+        System.out.print("Enter shoe color: ");
+        String cor = scanner.nextLine().trim();
+
+        System.out.print("Enter year of collection: ");
+        int ano_colecao = Integer.parseInt(scanner.nextLine().trim());
 
 
+
+        return new Sapatilha(descricao, marca, itemId, transportadora, preco, desconto, numDonos, stock, tamanho, atacadoresBool, cor, ano_colecao);
+    }
+
+    public static void printShoeToFile(Sapatilha sapatilha, String filename) {
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
+            writer.println(sapatilha.toString2() + ",");
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Failed to print Shoe to file.");
+        }
+    }
 }
