@@ -64,7 +64,18 @@ public class Transportadora {
         return preço_media;
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new Transportadora(this);
+    }
 
+    @Override
+    public boolean equals(Object p){
+        if (p == this) return true;
+        if (p == null || this.getClass() != p.getClass()) return false;
+        Transportadora t = (Transportadora) p;
+        return this.nome.equals(t.nome) && this.preço_pequena == t.preço_pequena && this.preço_media == t.preço_media && this.preço_grande == t.preço_grande;
+    }
 
     @Override
     public String toString() {
