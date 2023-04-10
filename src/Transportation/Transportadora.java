@@ -1,3 +1,7 @@
+package Transportation;
+
+import java.util.Objects;
+
 public class Transportadora {
     private String nome;
     private double preço_pequena;//1 artigo
@@ -58,5 +62,17 @@ public class Transportadora {
 
     public double getPreço_media() {
         return preço_media;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Transportadora{" +
+                "nome='" + nome + '\'' +
+                ", preço_pequena=" + preço_pequena +
+                ", preço_media=" + preço_media +
+                ", preço_grande=" + preço_grande +
+                '}';
     }
 }
