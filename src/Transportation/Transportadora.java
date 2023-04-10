@@ -65,7 +65,7 @@ public class Transportadora {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException {
         return new Transportadora(this);
     }
 
