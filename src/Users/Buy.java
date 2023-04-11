@@ -4,6 +4,8 @@ import Items.Artigo;
 import Items.Mala;
 import Items.Sapatilha;
 import Items.Tshirt;
+import Time.Data;
+import Transportation.Encomenda;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class Buy {
     public static void buyArticle(String userEmail) {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
+        Encomenda encomenda = new Encomenda(new ArrayList<>(),0,0.0,"Em transito", Data.tempo,""); //verificar a transportadora
         String BUY_FILE = "buyhistory.txt";
 
         while(running) {
