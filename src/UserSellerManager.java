@@ -3,6 +3,7 @@ import java.util.*;
 import Users.Purchases;
 import Users.User;
 
+import static Users.BuyOrSell.buyOrSellArticle;
 import static Users.User.*;
 import static Users.Buy.*;
 import static Users.Sell.*;
@@ -46,26 +47,7 @@ public class UserSellerManager {
                         break;
                 }
             }
-            System.out.println("Welcome to the shop, here to 1)buy, 2)sell, 3)buy history, 4)sell history: ");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    buyArticle(userEmail);
-                    break;
-                case 2:
-                    sellArticle(userEmail);
-                    break;
-                case 3:
-                    Purchases.printUserSales(userEmail, "buyhistory.txt");
-                    break;
-                case 4:
-                    Purchases.printUserSales(userEmail, "sellhistory.txt");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
-            }
-            scanner.close();
+            buyOrSellArticle(userEmail);
         }
     }
 }
