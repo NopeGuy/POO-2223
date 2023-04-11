@@ -1,5 +1,7 @@
 package Items;
 
+import Time.Data;
+
 import java.time.LocalDate;
 
 public class MalaPremium extends Mala{
@@ -18,15 +20,15 @@ public class MalaPremium extends Mala{
     }
 
 
-    public void descontoMala(){
+    public void calculaDesconto(){
         double dAno;
-        dAno=(LocalDate.now().getYear()-this.getAno_colecao());
+        dAno=(Data.tempo.getYear()-this.getAno_colecao());
         this.setDesconto(dAno*5);
     }
 
-    public void calculaPrecoMala(){
-        this.descontoMala();
-        this.setPreco(this.getPreco()*(1+this.getDesconto())/100);
+    public void calculaPreco(){
+        this.calculaDesconto();
+        this.setPreco(this.getPreco()*(1+this.getDesconto())/100+this.taxaSatisfacao());
     }
 
 }

@@ -108,8 +108,14 @@ public class Artigo {
         this.stock = stock;
     }
 
+
     public Artigo clone(){
         return new Artigo(this);
+    }
+
+    public double taxaSatisfacao(){
+        if(this.num_donos>0) return 0.25;
+        else return 0.5;
     }
 
     public boolean equals(Object o){

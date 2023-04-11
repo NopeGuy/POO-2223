@@ -1,5 +1,7 @@
 package Items;
 
+import Time.Data;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -91,10 +93,10 @@ public class Mala extends Artigo {
 
     //Desconto descontoMala dá set ao desconto, calculaPrecoMala calcula o novo preço
 
-    public void descontoMala(){
+    public void calculaDesconto(){
         double dDim,dAno,dMat;
         if(this.getNum_donos()>0) {
-            dAno=(LocalDate.now().getYear()-this.getAno_colecao());
+            dAno=(Data.tempo.getYear()-this.getAno_colecao());
             if (this.getDimensao().equals("small")) dDim=20;
             else if (this.getDimensao().equals("medium")) dDim=10;
             else dDim=0;
@@ -105,10 +107,10 @@ public class Mala extends Artigo {
         }
     }
     //calcula o preço final (apenas dependente do tamanho da mala)
-    public void calculaPrecoMala(){
-        this.descontoMala();
+    public void calculaPreco(){
+        this.calculaDesconto();
         if(this.getDesconto()>=100) this.setPreco(0);
-        else this.setPreco(this.getPreco()*(1-this.getDesconto()/100));
+        else this.setPreco(this.getPreco()*(1-this.getDesconto()/100)+this.taxaSatisfacao());
     }
 
     public static Mala createHandbag() {

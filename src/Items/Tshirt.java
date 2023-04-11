@@ -82,11 +82,11 @@ public class Tshirt extends Artigo{
 
     //metodo desconto
 
-    public void calculaPrecoTshirt() {
+    public void calculaPreco() {
         if (this.getNum_donos() > 0) {
             if (this.padrao.equals("lisa")) this.setDesconto(0);
             else this.setDesconto(50);
-            this.setPreco(this.getPreco() * (1 - this.getDesconto() / 100));
+            this.setPreco(this.getPreco() * (1 - this.getDesconto() / 100)+this.taxaSatisfacao());
         }
     }
 

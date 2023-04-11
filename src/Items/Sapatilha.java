@@ -1,5 +1,7 @@
 package Items;
 
+import Time.Data;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -102,16 +104,20 @@ public class Sapatilha extends Artigo{
     //metodos desconto
 
     public boolean validaDescontoSapatilha(){
-        if((LocalDate.now().getYear()-this.getAno_colecao()<=0)) return false;
+        if((Data.tempo.getYear()-this.getAno_colecao()<=0)) return false;
         return this.getTamanho() > 45;
     }
 
-    public void calculaDescontoSapatilha(){
+    public void calculaDesconto(){
         if(this.validaDescontoSapatilha()){
-        this.setDesconto((LocalDate.now().getYear()-this.getAno_colecao()));
+        this.setDesconto((Data.tempo.getYear()-this.getAno_colecao()));
         }
         else this.setDesconto(0);
-        this.setPreco(this.getPreco()*(1-this.getDesconto()/100));
+
+    }
+    public void calculaPreco(){
+        calculaDesconto();
+        this.setPreco(this.getPreco()*(1-this.getDesconto()/100)+this.taxaSatisfacao());
     }
 
     //há desconto se forem de um ano diferente do atual, ou tamanho > 45

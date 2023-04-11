@@ -1,4 +1,6 @@
-import Items.Artigo;
+import Items.*;
+import Time.Data;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,24 +11,26 @@ public class Encomenda {
     private int dimensao;
     private double preco_final;
     private String estado;
-    private LocalDate data_criacao;
+    private final LocalDate data_criacao;
+    private String transportadora;
 
     // Construtor
-    public Encomenda(Collection<Artigo> colecao, int dimensao, double preco_final, String estado, LocalDate data_criacao) {
+    public Encomenda(Collection<Artigo> colecao, int dimensao, double preco_final, String estado, LocalDate data_criacao,String transportadora) {
         this.colecao = new ArrayList<>(colecao);
         this.dimensao = dimensao;
         this.preco_final = preco_final;
         this.estado = estado;
         this.data_criacao = data_criacao;
+        this.transportadora=transportadora;
     }
     // Construtor de cópia
     public Encomenda(Encomenda encomenda) {
-        this(encomenda.colecao, encomenda.dimensao, encomenda.preco_final, encomenda.estado, encomenda.data_criacao);
+        this(encomenda.colecao, encomenda.dimensao, encomenda.preco_final, encomenda.estado, encomenda.data_criacao,encomenda.transportadora);
     }
 
     // Construtor vazio
     public Encomenda() {
-        this(new ArrayList<>(), 0, 0.0, "", LocalDate.now());
+        this(new ArrayList<>(), 0, 0.0, "", LocalDate.now(),"");
     }
 
 
@@ -51,7 +55,22 @@ public class Encomenda {
         return data_criacao;
     }
 
+    public String getTransportadora(){return transportadora;}
+
     // Métodos de modificação
+
+    public void calcularPrecoFinal() {
+        double total = 0.0;
+        for (Artigo artigo : colecao) {
+            if(artigo instanceof Mala) ((Mala) artigo).calculaPreco();
+            if(artigo instanceof MalaPremium) ((MalaPremium) artigo).calculaPreco();
+            if(artigo instanceof Sapatilha) ((Sapatilha) artigo).calculaPreco();
+            if(artigo instanceof SapatilhaPremium) ((SapatilhaPremium) artigo).calculaPreco();
+            if(artigo instanceof Tshirt) ((Tshirt) artigo).calculaPreco();
+            total += artigo.getPreco();
+        }
+        this.preco_final = total;
+    }
     public void adicionarArtigo(Artigo artigo) {
         if(artigo.getStock()>0){
         if(colecao.add(artigo.clone())){
@@ -70,17 +89,10 @@ public class Encomenda {
         }
     }
 
-    public void calcularPrecoFinal() {
-        double total = 0.0;
-        for (Artigo artigo : colecao) {
-            total += artigo.getPreco();
-        }
-        this.preco_final = total;
-    }
+
 
     public boolean validaDevolucao(){
-        if(this.data_criacao.isBefore(LocalDate.now().minusDays(2))) return false;
-        return true;
+        return !this.data_criacao.isBefore(Data.tempo.minusDays(2));
     }
 
     // Métodos sobrescritos
