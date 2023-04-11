@@ -17,6 +17,7 @@ import static Items.Sapatilha.printShoeToFile;
 import static Items.Sapatilha.printShoetoFileHistory;
 import static Items.Tshirt.printTshirtToFile;
 import static Items.Tshirt.printTshirtToFileHistory;
+import static Users.BuyOrSell.buyOrSellArticle;
 import static Users.Purchases.printAllSalesExceptUser;
 import static Users.Purchases.removeItemFromUserStock;
 
@@ -27,7 +28,7 @@ public class Buy {
         String BUY_FILE = "buyhistory.txt";
 
         while(running) {
-            System.out.println("Select if you want to see the stock 1) or buy something 2):");
+            System.out.println("Select if you want to see the stock 1) or buy something 2) or 0) exit:");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -37,6 +38,9 @@ public class Buy {
                     System.out.println("Select the item you want to buy by typing the id: ");
                     String itemId = scanner.next();
                     removeItemFromUserStock(userEmail, itemId);
+                    break;
+                case 0:
+                    buyOrSellArticle(userEmail);
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
