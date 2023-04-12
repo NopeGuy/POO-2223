@@ -11,6 +11,7 @@ public class Data {
         System.out.println("\nPlease enter the number of days to skip: ");
         int days = scanner.nextInt();
         tempo=tempo.plusDays(days);
+        System.out.println(tempo);
         //falta inserir aqui as verificações das encomendas em transito
     }
     
@@ -25,17 +26,12 @@ public class Data {
     public static void startTempo(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the initial date (dd-mm-yyyy): ");
-        scanner.nextLine();
-        int[] valoresData = new int[3];
-        int i=0;
-        while(scanner.hasNext()){
-            if(scanner.hasNextInt()){
-                valoresData[i]=scanner.nextInt();
-                i++;
-            }
-            scanner.next();
-        }
-        LocalDate novo = LocalDate.of(valoresData[2],valoresData[1],valoresData[0]);
+        String bo = scanner.next();
+        String[] bos = bo.split("-");
+        int dia = Integer.parseInt(bos[0]);
+        int mes = Integer.parseInt(bos[1]);
+        int ano = Integer.parseInt(bos[2]);
+        LocalDate novo = LocalDate.of(ano,mes,dia);
         tempo=novo;
     }
 }

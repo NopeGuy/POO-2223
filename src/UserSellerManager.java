@@ -1,5 +1,6 @@
 import java.util.*;
 
+import Time.Data;
 import Users.Purchases;
 import Users.User;
 
@@ -47,6 +48,7 @@ public class UserSellerManager {
                         break;
                 }
             }
+                Data.startTempo();
             buyOrSellArticle(userEmail);
         }
     }
