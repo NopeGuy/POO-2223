@@ -93,6 +93,7 @@ public class Encomenda {
 
 
 
+
     public boolean validaDevolucao(){
         return !this.data_criacao.isBefore(Data.tempo.minusDays(2));
     }

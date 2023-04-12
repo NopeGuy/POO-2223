@@ -1,5 +1,6 @@
 package Users;
-
+import Time.Data;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class BuyOrSell {
@@ -7,8 +8,11 @@ public class BuyOrSell {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
 
+        //Para inicializar em que data começa
+        Data.startTempo();
+
         while(running) {
-            System.out.println("\"Welcome to the shop, here to 1)buy, 2)sell, 3)buy history, 4)sell history or 0) Exit:");
+            System.out.println("\"Welcome to the shop, here to 1)buy, 2)sell, 3)buy history, 4)sell history, 5)advance date or 0) Exit:");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -23,6 +27,8 @@ public class BuyOrSell {
                 case 4:
                     Purchases.printUserSales(userEmail, "sellhistory.txt");
                     break;
+                case 5:
+                    Data.addDays();
                 case 0:
                     return;
                 default:
