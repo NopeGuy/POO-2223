@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class Encomenda {
+    private String encomendaId;
     private Collection<Artigo> colecao;
     private int dimensao;
     private double preco_final;
@@ -36,9 +37,48 @@ public class Encomenda {
     }
 
 
+    //isto pode não estar bem, é só uma tentativa,
+    public void setColecao(Collection<Artigo> colecao) {
+        if (colecao == null) {
+            throw new IllegalArgumentException("A coleção de artigos não pode ser nula.");
+        }
+        this.colecao = new ArrayList<Artigo>();
+
+        for(Artigo a : colecao){
+            this.colecao.add(a.clone());
+        }
+    }
+
     // Métodos de acesso
+    public void setDimensao(int dimensao) {
+        this.dimensao = dimensao;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setPreco_final(double preco_final) {
+        this.preco_final = preco_final;
+    }
+
+    public void setTransportadora(String transportadora) {
+        this.transportadora = transportadora;
+    }
+    public void setEncomendaId(String encomendaId) {
+        this.encomendaId = encomendaId;
+    }
+
+
+    public String getEncomendaId() {
+        return encomendaId;
+    }
+
     public Collection<Artigo> getColecao() {
-        return new ArrayList<>(colecao);
+        ArrayList<Artigo> ret = new ArrayList<Artigo>();
+        for (Artigo a : this.colecao)
+            ret.add(a.clone());
+        return ret;
     }
 
     public int getDimensao() {
