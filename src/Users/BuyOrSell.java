@@ -8,9 +8,6 @@ public class BuyOrSell {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
 
-        //Para inicializar em que data começa
-        Data.startTempo();
-
         while(running) {
             System.out.println("\"Welcome to the shop, here to 1)buy, 2)sell, 3)buy history, 4)sell history, 5)advance date or 0) Exit:");
             int choice = scanner.nextInt();
@@ -29,6 +26,8 @@ public class BuyOrSell {
                     break;
                 case 5:
                     Data.addDays();
+                    System.out.println("Date advanced to " + Data.tempo + "\n");
+                    break;
                 case 0:
                     return;
                 default:

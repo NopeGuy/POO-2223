@@ -1,5 +1,6 @@
 import java.util.*;
 
+import Time.Data;
 import Users.Purchases;
 import Users.User;
 
@@ -19,6 +20,8 @@ public class UserSellerManager {
             boolean loggedIn = false;
             String userId = "";
             String userEmail = "";
+            //Para inicializar em que data começa
+            Data.startTempo();
             while (!loggedIn) {
                 System.out.println("\\Welcome to Vintagio/");
                 System.out.println("Choose an option:");

@@ -36,20 +36,28 @@ public class Data {
         tempo=x;
     }
 
-    public static void startTempo(){
+    public static void startTempo() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter the initial date (dd-mm-yyyy): ");
-        scanner.nextLine();
-        int[] valoresData = new int[3];
-        int i=0;
-        while(scanner.hasNext()){
-            if(scanner.hasNextInt()){
-                valoresData[i]=scanner.nextInt();
-                i++;
+        // Print animation
+        /*
+        String animation = ".....        \nUnexpected System Reset\nPlease enter the system date (dd-mm-yyyy):\n->";
+        for (int i = 0; i < animation.length(); i++) {
+            System.out.print(animation.charAt(i));
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                // Do nothing
             }
-            scanner.next();
         }
-        LocalDate novo = LocalDate.of(valoresData[2],valoresData[1],valoresData[0]);
-        tempo=novo;
+        */
+        System.out.print("Please enter the initial date (dd-mm-yyyy): ");
+        String input = scanner.nextLine();
+        String[] valoresData = input.split("-");
+        int[] parsedData = new int[3];
+        for (int i = 0; i < valoresData.length; i++) {
+            parsedData[i] = Integer.parseInt(valoresData[i]);
+        }
+        LocalDate novo = LocalDate.of(parsedData[2], parsedData[1], parsedData[0]);
+        tempo = novo;
     }
 }
