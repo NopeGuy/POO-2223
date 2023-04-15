@@ -103,59 +103,6 @@ public class Purchases {
     }
 
 
-    public static void printAllSalesExceptUser(String userEmail) {
-        String STOCK_DIRECTORY = "stock/";
-        File directory = new File(STOCK_DIRECTORY);
-        File[] files = directory.listFiles();
-
-        if (files == null) {
-            System.out.println("Directory " + STOCK_DIRECTORY + " does not exist.");
-            return;
-        }
-
-        for (File file : files) {
-            if (file.getName().endsWith(".txt") && !file.getName().startsWith(userEmail)) {
-                try {
-                    Scanner scanner = new Scanner(file);
-
-                    while (scanner.hasNextLine()) {
-                        String line = scanner.nextLine();
-                        String[] values = line.split(":");
-
-                        String itemType = values[2].substring(0, 2);
-
-                        switch (itemType) {
-                            case "TN":
-                                System.out.println("T-Shirt");
-                                System.out.println("Description: " + values[0] + ", Brand: " + values[1] + ", Item ID: " + values[2] + ", Transport Company: " + values[3]
-                                        + ", Price: " + values[4] + ", Discount: " + values[5] + ", Previous Owners: " + values[6] + ", Stock: " + values[7] + "\n"
-                                        + "Size: " + values[8] + ", Pattern: " + values[9] + "\n");
-                                break;
-                            case "SN":
-                                System.out.println("Shoe");
-                                System.out.println("Description: " + values[0] + ", Brand: " + values[1] + ", Item ID: " + values[2] + ", Transport Company: " + values[3]
-                                        + ", Price: " + values[4] + ", Discount: " + values[5] + ", Previous Owners: " + values[6] + ", Stock: " + values[7] + "\n" +
-                                        "Size: " + values[8] + ", Has shoelaces: " + values[9] + ", Color: " + values[10] + ", Collection Year: " + values[11] + "\n");
-                                break;
-                            case "HN":
-                                System.out.println("Handbag");
-                                System.out.println("Description: " + values[0] + ", Brand: " + values[1] + ", Item ID: " + values[2] + ", Transport Company: " + values[3]
-                                        + ", Price: " + values[4] + ", Discount: " + values[5] + ", Previous Owners: " + values[6] + ", Stock: " + values[7] + "\n" +
-                                        "Size: " + values[8] + ", Collection Year: " + values[9] + ", Material: " + values[10] + "\n");
-                                break;
-                            default:
-                                System.out.println("Unknown item type: " + itemType);
-                                break;
-                        }
-                    }
-
-                    scanner.close();
-                } catch (FileNotFoundException e) {
-                    System.out.println("File not found: " + file.getName());
-                }
-            }
-        }
-    }
     public static void removeItemFromUserStock(String userEmail, String itemId) {
         File folder = new File("stock/");
         String BUY_FILE = "buyhistory.txt";

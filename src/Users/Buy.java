@@ -46,22 +46,36 @@ public class Buy {
                 case 2:
                     System.out.println("Select the item you want to add to your shopping cart typing the id: ");
                     itemId = scanner.next();
-                    //addItemToCart(itemId, cart);
-
+                    for (Artigo artigo : stock) {
+                        if (Objects.equals(artigo.getItem_id(), itemId)) {
+                            cart.add(artigo);
+                            System.out.println("Item added to cart.");
+                            break;
+                        }
+                    }
                     break;
                 case 3:
-                    System.out.println("Select the item you want to remove to your shopping cart typing the id: ");
+                    System.out.println("Select the item you want to remove from your shopping cart typing the id: ");
                     itemId = scanner.next();
-                    //removeItemFromCart(itemId, cart);
+                    for (Artigo artigo : cart) {
+                        if (Objects.equals(artigo.getItem_id(), itemId)) {
+                            cart.remove(artigo);
+                            System.out.println("Item removed from cart.");
+                            break;
+                        }
+                    }
                     break;
                 case 4:
                     System.out.println("Your shopping cart:\n");
                     for (Artigo artigo : cart) {
                         System.out.println(artigo.toString());
                     }
+                    System.out.println("\n");
                     break;
                 case 5:
-                    System.out.println("Your total comes to:");
+                    double precoTotal;
+                    //createEncomenda();
+                    //System.out.println("Your total comes to: " + precoTotal + "€");
                     for (Artigo artigo : cart) {
                         removeItemFromUserStock(userEmail, artigo.getItem_id());
                     }
