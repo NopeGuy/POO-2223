@@ -3,6 +3,8 @@ package Transportation;
 import Items.*;
 import Time.Data;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -133,6 +135,16 @@ public class Encomenda {
         }
     }
 
+    public static void addEncomendaToFile(String userEmail, Encomenda encomenda) {
+        try {
+            FileWriter writer = new FileWriter("orders.txt", true);
+            String orderLine = userEmail + ":" + encomenda.toString() + "\n";
+            writer.write(orderLine);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 
 
 
@@ -165,17 +177,12 @@ public class Encomenda {
     @Override
     public String toString() {
         return "Encomenda{" +
-                "colecao=" + colecao +
-                ", dimensao='" + dimensao + '\'' +
-                ", preco_final=" + preco_final +
-                ", estado='" + estado + '\'' +
-                ", data_criacao=" + data_criacao +
+                "colecao: " + colecao +
+                ", dimensao: " + dimensao +
+                ", preco_final: " + preco_final +
+                ", estado: " + estado +
+                ", data_criacao: " + data_criacao +
                 '}';
     }
 
 }
-
-//criar encomenda
-//adicionar artigos
-//calcular preço final = set preço final
-//devolver

@@ -105,9 +105,9 @@ public class Purchases {
 
     public static void removeItemFromUserStock(String userEmail, String itemId) {
         File folder = new File("stock/");
-        String BUY_FILE = "buyhistory.txt";
         File[] files = folder.listFiles();
 
+        assert files != null;
         for (File file : files) {
             if (file.getName().endsWith(".txt")) {
                 try {
@@ -128,12 +128,6 @@ public class Purchases {
                                 values[7] = Integer.toString(stock);
                                 line = String.join(":", values);
                             }
-
-                            // add the modified line to the buy history
-                            FileWriter buyWriter = new FileWriter(BUY_FILE, true);
-                            String buyLine = userEmail + ":" + line + "\n";
-                            buyWriter.write(buyLine);
-                            buyWriter.close();
                         }
                         lines.add(line);
                     }

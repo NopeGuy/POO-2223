@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static Transportation.Encomenda.addEncomendaToFile;
 import static Users.BuyOrSell.buyOrSellArticle;
 import static Users.Purchases.getAllSales;
 import static Users.Purchases.removeItemFromUserStock;
@@ -84,11 +85,11 @@ public class Buy {
                             totalPrice += artigo.getPreco();
                         }
                         encomenda.setColecao(cart);
+                        encomenda.setDimensao(cart.size());
                         encomenda.setPrecoFinal(totalPrice);
                         encomenda.setEstado("Em transito");
                         encomenda.setDataCriacao(Data.tempo);
-                        //addEncomendaToHistory(userEmail, encomenda);
-                        //writeToFile(BUY_FILE, encomenda.toString());
+                        addEncomendaToFile(userEmail, encomenda);
                         for (Artigo artigo : cart) {
                             removeItemFromUserStock(userEmail, artigo.getItem_id());
                         }
