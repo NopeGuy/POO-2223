@@ -60,11 +60,7 @@ public class Tshirt extends Artigo{
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Tshirt{");
-        sb.append("tamanho=").append(this.tamanho);
-        sb.append(", padrao=").append(this.padrao);
-        sb.append(", ").append(super.toString());
-        sb.append("}");
+        sb.append("Tshirt-> ").append(super.toString()).append("Tamanho: ").append(this.tamanho).append(", Padrao: ").append(this.padrao);
         return sb.toString();
     }
 
@@ -124,8 +120,7 @@ public class Tshirt extends Artigo{
         System.out.print("Enter price: ");
         double preco = Double.parseDouble(scanner.nextLine().trim());
 
-        System.out.print("Enter discount: ");
-        double desconto = Double.parseDouble(scanner.nextLine().trim());
+        double desconto = 0.0;
 
         System.out.print("Enter number of previous owners: ");
         int numDonos = Integer.parseInt(scanner.nextLine().trim());
@@ -185,7 +180,7 @@ public class Tshirt extends Artigo{
     public static void printTshirtToFile(Tshirt tshirt, String filename) {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
-            writer.println(tshirt.toString2() + ",");
+            writer.println(tshirt.toString2());
             writer.close();
         } catch (IOException e) {
             System.out.println("Failed to print T-Shirt to file.");
@@ -195,7 +190,7 @@ public class Tshirt extends Artigo{
     public static void printTshirtToFileHistory(String userEmail, Tshirt tshirt, String filename) {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
-            writer.println(userEmail + ":" + tshirt.toString2() + ",");
+            writer.println(userEmail + ":" + tshirt.toString2());
             writer.close();
         } catch (IOException e) {
             System.out.println("Failed to print T-Shirt to file history.");

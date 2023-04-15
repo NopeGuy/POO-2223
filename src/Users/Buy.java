@@ -29,7 +29,7 @@ public class Buy {
         Encomenda encomenda = new Encomenda(new ArrayList<>(),0,0.0,"Em transito", Data.tempo,""); //verificar a transportadora
         String BUY_FILE = "buyhistory.txt";
         ArrayList<Artigo> cart = new ArrayList<>();
-        ArrayList<Artigo> stock = getAllSales();
+        ArrayList<Artigo> stock = getAllSales(userEmail);
         String itemId;
 
         while(running) {
@@ -38,28 +38,37 @@ public class Buy {
 
             switch (choice) {
                 case 1:
+                    System.out.println("Stock:\n");
                     for (Artigo artigo : stock) {
-                    System.out.println(artigo.toString());
+                    System.out.println(artigo.toString() + "\n");
                 }
                     break;
                 case 2:
                     System.out.println("Select the item you want to add to your shopping cart typing the id: ");
                     itemId = scanner.next();
-                    addItemToCart(itemId, cart);
+                    //addItemToCart(itemId, cart);
 
                     break;
                 case 3:
                     System.out.println("Select the item you want to remove to your shopping cart typing the id: ");
+                    itemId = scanner.next();
+                    //removeItemFromCart(itemId, cart);
                     break;
                 case 4:
-
+                    System.out.println("Your shopping cart:\n");
+                    for (Artigo artigo : cart) {
+                        System.out.println(artigo.toString());
+                    }
                     break;
                 case 5:
-                    itemId = scanner.next();
-                    removeItemFromUserStock(userEmail, itemId);
+                    System.out.println("Your total comes to:");
+                    for (Artigo artigo : cart) {
+                        removeItemFromUserStock(userEmail, artigo.getItem_id());
+                    }
                     break;
                 case 0:
                     buyOrSellArticle(userEmail);
+                    cart = new ArrayList<>();
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");

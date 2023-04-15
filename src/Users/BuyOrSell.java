@@ -9,7 +9,7 @@ public class BuyOrSell {
         Scanner scanner = new Scanner(System.in);
 
         while(running) {
-            System.out.println("\"Welcome to the shop, here to 1)buy, 2)sell, 3)buy history, 4)sell history, 5)advance date or 0) Exit:");
+            System.out.println("\"Welcome to the shop, here to 1)buy, 2)sell, 3)buy history, 4)sell history, 5)advance date: ");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -28,8 +28,6 @@ public class BuyOrSell {
                     Data.addDays();
                     System.out.println("Date advanced to " + Data.tempo + "\n");
                     break;
-                case 0:
-                    return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
                     break;
