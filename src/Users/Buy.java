@@ -67,20 +67,19 @@ public class Buy {
                     double totalPrice = encomenda.calcularPrecoFinal(cart);
                     System.out.println("Your total comes to: " + totalPrice + "€, do you want to proceed? [1) Yes, 2) No]");
                     int choice2 = scanner.nextInt();
-                    boolean proceed = true;  // add flag variable
+                    boolean proceed = true;
                     switch (choice2) {
                         case 1:
-                            // same as before
                             break;
                         case 2:
                             System.out.println("Your order has been cancelled.");
-                            proceed = false;  // set flag to false
+                            proceed = false;
                             break;
                         default:
                             System.out.println("Invalid choice. Please try again.");
                             break;
                     }
-                    if (proceed) {  // check flag before leaving switch case
+                    if (proceed) {
                         for (Artigo artigo : cart) {
                             totalPrice += artigo.getPreco();
                         }
