@@ -14,7 +14,7 @@ public class Encomenda {
     private int dimensao;
     private double preco_final;
     private String estado;
-    private final LocalDate data_criacao;
+    private LocalDate data_criacao;
     private String transportadora;
 
     // Construtor
@@ -53,12 +53,14 @@ public class Encomenda {
     public void setDimensao(int dimensao) {
         this.dimensao = dimensao;
     }
-
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.data_criacao = dataCriacao;
+    }
     public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public void setPreco_final(double preco_final) {
+    public void setPrecoFinal(double preco_final) {
         this.preco_final = preco_final;
     }
 
@@ -101,7 +103,7 @@ public class Encomenda {
 
     // Métodos de modificação
 
-    public void calcularPrecoFinal() {
+    public double calcularPrecoFinal(ArrayList<Artigo> colecao){
         double total = 0.0;
         for (Artigo artigo : colecao) {
             if(artigo instanceof Mala) ((Mala) artigo).calculaPreco();
@@ -111,7 +113,7 @@ public class Encomenda {
             if(artigo instanceof Tshirt) ((Tshirt) artigo).calculaPreco();
             total += artigo.getPreco();
         }
-        this.preco_final = total;
+        return total;
     }
     public void adicionarArtigo(Artigo artigo) {
         if(artigo.getStock()>0){
@@ -119,8 +121,8 @@ public class Encomenda {
             this.dimensao++;
             this.preco_final += artigo.getPreco();
             artigo.setStock(artigo.getStock()-1);
+            }
         }
-    }
     }
 
     public void removerArtigo(Artigo artigo) {

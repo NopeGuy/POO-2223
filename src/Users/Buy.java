@@ -1,26 +1,16 @@
 package Users;
 
 import Items.Artigo;
-import Items.Mala;
-import Items.Sapatilha;
-import Items.Tshirt;
 import Time.Data;
 import Transportation.Encomenda;
 
-import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static Items.Mala.printHandbagToFile;
-import static Items.Mala.printHandbagToFileHistory;
-import static Items.Sapatilha.printShoeToFile;
-import static Items.Sapatilha.printShoetoFileHistory;
-import static Items.Tshirt.printTshirtToFile;
-import static Items.Tshirt.printTshirtToFileHistory;
 import static Users.BuyOrSell.buyOrSellArticle;
-import static Users.Purchases.*;
+import static Users.Purchases.getAllSales;
+import static Users.Purchases.removeItemFromUserStock;
 
 public class Buy {
     public static void buyArticle(String userEmail) {
@@ -33,7 +23,7 @@ public class Buy {
         String itemId;
 
         while(running) {
-            System.out.println("Select if you want to:\n1) See the stock\n2) Add items to your shopping cart\n3) Remove items from shopping cart\n4)Display shopping cart\n5)Buy shopping cart\n\n0) exit:");
+            System.out.println("Select if you want to:\n1) See the stock\n2) Add an item to your shopping cart\n3) Remove an item from your shopping cart\n4)Display shopping cart\n5)Buy shopping cart\n\n0) exit:");
             int choice = scanner.nextInt();
 
             switch (choice) {
@@ -66,18 +56,44 @@ public class Buy {
                     }
                     break;
                 case 4:
-                    System.out.println("Your shopping cart:\n");
+                    System.out.println("\nYour shopping cart:");
                     for (Artigo artigo : cart) {
                         System.out.println(artigo.toString());
                     }
                     System.out.println("\n");
                     break;
                 case 5:
-                    double precoTotal;
-                    //createEncomenda();
-                    //System.out.println("Your total comes to: " + precoTotal + "€");
-                    for (Artigo artigo : cart) {
-                        removeItemFromUserStock(userEmail, artigo.getItem_id());
+                    double totalPrice = encomenda.calcularPrecoFinal(cart);
+                    System.out.println("Your total comes to: " + totalPrice + "€, do you want to proceed? [1) Yes, 2) No]");
+                    int choice2 = scanner.nextInt();
+                    boolean proceed = true;  // add flag variable
+                    switch (choice2) {
+                        case 1:
+                            // same as before
+                            break;
+                        case 2:
+                            System.out.println("Your order has been cancelled.");
+                            proceed = false;  // set flag to false
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Please try again.");
+                            break;
+                    }
+                    if (proceed) {  // check flag before leaving switch case
+                        for (Artigo artigo : cart) {
+                            totalPrice += artigo.getPreco();
+                        }
+                        encomenda.setColecao(cart);
+                        encomenda.setPrecoFinal(totalPrice);
+                        encomenda.setEstado("Em transito");
+                        encomenda.setDataCriacao(Data.tempo);
+                        //addEncomendaToHistory(userEmail, encomenda);
+                        //writeToFile(BUY_FILE, encomenda.toString());
+                        for (Artigo artigo : cart) {
+                            removeItemFromUserStock(userEmail, artigo.getItem_id());
+                        }
+                        System.out.println("Your order has been placed. Thank you for your purchase.\n");
+                        running = false;
                     }
                     break;
                 case 0:
