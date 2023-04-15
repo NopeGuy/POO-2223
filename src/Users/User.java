@@ -1,7 +1,5 @@
 package Users;
 
-import Items.Artigo;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,5 @@
 package Transportation;
 
-import java.util.Objects;
-
 public class Transportadora {
     private String nome;
     private double preço_pequena;//1 artigo

@@ -184,5 +184,4 @@ public class Encomenda {
                 ", data_criacao: " + data_criacao +
                 '}';
     }
-
 }

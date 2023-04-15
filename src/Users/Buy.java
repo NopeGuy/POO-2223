@@ -24,7 +24,7 @@ public class Buy {
         String itemId;
 
         while(running) {
-            System.out.println("Select if you want to:\n1) See the stock\n2) Add an item to your shopping cart\n3) Remove an item from your shopping cart\n4)Display shopping cart\n5)Buy shopping cart\n\n0) exit:");
+            System.out.println("Select if you want to:\n1) See the stock\n2) Add an item to your shopping cart\n3) Remove an item from your shopping cart\n4) Display shopping cart\n5) Buy shopping cart\n\n0) exit:");
             int choice = scanner.nextInt();
 
             switch (choice) {
@@ -65,7 +65,7 @@ public class Buy {
                     break;
                 case 5:
                     double totalPrice = encomenda.calcularPrecoFinal(cart);
-                    System.out.println("Your total comes to: " + totalPrice + "€, do you want to proceed? [1) Yes, 2) No]");
+                    System.out.println("Your total comes to: " + totalPrice + "€, do you want to proceed? \n[1) Yes, 2) No]");
                     int choice2 = scanner.nextInt();
                     boolean proceed = true;
                     switch (choice2) {

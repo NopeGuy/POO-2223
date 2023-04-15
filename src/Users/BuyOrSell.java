@@ -1,6 +1,7 @@
 package Users;
+
 import Time.Data;
-import java.time.LocalDate;
+
 import java.util.Scanner;
 
 public class BuyOrSell {
@@ -9,7 +10,7 @@ public class BuyOrSell {
         Scanner scanner = new Scanner(System.in);
 
         while(running) {
-            System.out.println("\"Welcome to the shop, here to 1)buy, 2)sell, 3)buy history, 4)sell history, 5)advance date: ");
+            System.out.println("\"Welcome to the shop, here to: \n1) Buy \n2) Sell \n3) Buy history \n4) Sell history \n5) Advance date ");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -19,7 +20,7 @@ public class BuyOrSell {
                     Sell.sellArticle(userEmail);
                     break;
                 case 3:
-                    Purchases.printUserSales(userEmail, "buyhistory.txt");
+                    //do later
                     break;
                 case 4:
                     Purchases.printUserSales(userEmail, "sellhistory.txt");
