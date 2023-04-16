@@ -4,6 +4,7 @@ import Transportation.Encomenda;
 import java.util.Collection;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.time.DateTimeException;
 
 public class Data {
     public static LocalDate tempo;
@@ -36,11 +37,8 @@ public class Data {
         tempo=x;
     }
 
-    public static void startTempo() {
-        Scanner scanner = new Scanner(System.in);
-        // Print animation
-        /*
-        String animation = ".....        \nUnexpected System Reset\nPlease enter the system date (dd-mm-yyyy):\n->";
+    public static void startTempo() throws DateTimeException {
+       /* String animation = ".....        \nUnexpected System Reset\nPlease enter the system date (dd-mm-yyyy):\n->";
         for (int i = 0; i < animation.length(); i++) {
             System.out.print(animation.charAt(i));
             try {
@@ -50,14 +48,22 @@ public class Data {
             }
         }
         */
-        System.out.print("Please enter the initial date (dd-mm-yyyy): ");
-        String input = scanner.nextLine();
-        String[] valoresData = input.split("-");
-        int[] parsedData = new int[3];
-        for (int i = 0; i < valoresData.length; i++) {
-            parsedData[i] = Integer.parseInt(valoresData[i]);
+        Scanner scanner = new Scanner(System.in);
+        LocalDate novo = null;
+        while (novo == null) {
+            System.out.print("Please enter the initial date (dd-mm-yyyy): ");
+            String input = scanner.nextLine();
+            String[] valoresData = input.split("-");
+            int[] parsedData = new int[3];
+            for (int i = 0; i < valoresData.length; i++) {
+                parsedData[i] = Integer.parseInt(valoresData[i]);
+            }
+            try {
+                novo = LocalDate.of(parsedData[2], parsedData[1], parsedData[0]);
+            } catch (DateTimeException e) {
+                System.out.println("Invalid date format, please enter in the format dd-mm-yyyy");
+            }
         }
-        LocalDate novo = LocalDate.of(parsedData[2], parsedData[1], parsedData[0]);
         tempo = novo;
     }
 }

@@ -25,8 +25,12 @@ public class UserSellerManager {
                 System.out.println("Choose an option:");
                 System.out.println("1. Log in");
                 System.out.println("2. Create new user");
+                System.out.println("0. Quit");
                 int choice = scanner.nextInt();
                 switch (choice) {
+                    case 0:
+                        System.out.println("Exiting program...");
+                        System.exit(0);
                     case 1:
                         System.out.println("Enter user email:");
                         userEmail = scanner.next();
