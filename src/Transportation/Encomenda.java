@@ -178,6 +178,7 @@ public class Encomenda {
     public String toString() {
         return "Encomenda{" +
                 "colecao: " + colecao +
+                " ID: " + encomendaId +
                 ", dimensao: " + dimensao +
                 ", preco_final: " + preco_final +
                 ", estado: " + estado +
