@@ -25,7 +25,19 @@ public class Buy {
 
         while(running) {
             System.out.println("Select if you want to:\n1) See the stock\n2) Add an item to your shopping cart\n3) Remove an item from your shopping cart\n4) Display shopping cart\n5) Buy shopping cart\n\n0) exit:");
-            int choice = scanner.nextInt();
+
+            int choice;
+            while (true) {
+                System.out.print("Please enter an integer: ");
+                if (scanner.hasNextInt()) {
+                    choice = scanner.nextInt();
+                    break;
+                } else {
+                    System.out.println("Invalid input. Please try again.");
+                    scanner.nextLine(); // consume the invalid input
+                }
+            }
+
 
             switch (choice) {
                 case 1:
