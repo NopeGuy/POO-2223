@@ -10,9 +10,12 @@ public class BuyOrSell {
         Scanner scanner = new Scanner(System.in);
 
         while(running) {
-            System.out.println("\"Welcome to the shop, here to: \n1) Buy \n2) Sell \n3) Buy history \n4) Sell history \n5) Advance date ");
+            System.out.println("\"Welcome to the shop, here to: \n1) Buy \n2) Sell \n3) Buy history \n4) Sell history \n5) Advance date\n0 - exit ");
             int choice = scanner.nextInt();
             switch (choice) {
+                case 0:
+                    System.out.println("Exiting program...");
+                    System.exit(0);
                 case 1:
                     Buy.buyArticle(userEmail);
                     break;
