@@ -5,7 +5,6 @@ import Time.Data;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Sapatilha extends Artigo{
@@ -86,7 +85,7 @@ public class Sapatilha extends Artigo{
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Sapatilha: ").append(super.toString()).append("Tamanho: ").append(this.tamanho).append("Atacadores: ").append(this.atacadores).append("Cor: ").append(this.cor).append("Ano da colecao: ").append(this.ano_colecao);
+        sb.append("Sapatilha-> ").append(super.toString()).append("Tamanho: ").append(this.tamanho).append(", Atacadores: ").append(this.atacadores).append(", Cor: ").append(this.cor).append(", Ano da colecao: ").append(this.ano_colecao);
         return sb.toString();
     }
     public String toString2(){
@@ -157,8 +156,7 @@ public class Sapatilha extends Artigo{
         System.out.print("Enter price: ");
         double preco = Double.parseDouble(scanner.nextLine().trim());
 
-        System.out.print("Enter discount: ");
-        double desconto = Double.parseDouble(scanner.nextLine().trim());
+        double desconto = 0.0;
 
         System.out.print("Enter number of previous owners: ");
         int numDonos = Integer.parseInt(scanner.nextLine().trim());
@@ -193,7 +191,7 @@ public class Sapatilha extends Artigo{
     public static void printShoeToFile(Sapatilha sapatilha, String filename) {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
-            writer.println(sapatilha.toString2() + ",");
+            writer.println(sapatilha.toString2());
             writer.close();
         } catch (IOException e) {
             System.out.println("Failed to print Shoe to file.");
@@ -202,7 +200,7 @@ public class Sapatilha extends Artigo{
     public static void printShoetoFileHistory(String userEmail, Sapatilha sapatilha, String filename) {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
-            writer.println(userEmail + ":" + sapatilha.toString2() + ",");
+            writer.println(userEmail + ":" + sapatilha.toString2());
             writer.close();
         } catch (IOException e) {
             System.out.println("Failed to print Shoe to file history.");

@@ -133,16 +133,14 @@ public class Artigo {
     }
 
     public String toString(){
-        return "Artigo{" +
-                "descricao='" + descricao + '\'' +
-                ", marca='" + marca + '\'' +
-                ", item_id='" + item_id + '\'' +
-                ", transportadora='" + transportadora + '\'' +
-                ", preco=" + preco +
-                ", desconto=" + desconto +
-                ", num_donos=" + num_donos +
-                ", stock='" + stock + '\'' +
-                '}';
+        return "Descricao: " + descricao +
+                ", Marca: " + marca +
+                ", ID do Item: " + item_id +
+                ", Transportadora: " + transportadora +
+                ", Preco: " + preco +
+                ", Desconto: " + desconto +
+                ", Num_donos: " + num_donos +
+                ", Stock: " + stock + ", ";
     }
 
     public String toString2(){

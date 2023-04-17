@@ -1,2 +1,0 @@
-a:A really nice show:abibas:SN69846:UPS:20000.0:0.0:30:29:53:true:yellow:2050,
-a:A really nice show:abibas:SN69846:UPS:20000.0:0.0:30:28:53:true:yellow:2050,

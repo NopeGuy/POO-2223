@@ -1,7 +1,5 @@
 package Users;
 
-import Items.Artigo;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +12,6 @@ public class User {
     private String email;
     private String morada;
     private String nif;
-    private List<Artigo> vendeu;
-    private List<Artigo> comprou;
-
 
     public User() {
         this.name = "";
@@ -24,18 +19,14 @@ public class User {
         this.email = "";
         this.morada = "";
         this.nif = "";
-        this.vendeu = new ArrayList<>();
-        this.comprou = new ArrayList<>();
     }
 
-    public User(String name, String userId, String email, String morada, String nif, List<Artigo> vendeu, List<Artigo> comprou) {
+    public User(String name, String userId, String email, String morada, String nif) {
         this.name = name;
         this.userId = userId;
         this.email = email;
         this.morada = morada;
         this.nif = nif;
-        this.vendeu = vendeu;
-        this.comprou = comprou;
     }
 
 
@@ -52,13 +43,7 @@ public class User {
                 String email = userData[2];
                 String morada = userData[3];
                 String nif = userData[4];
-                String vendas = userData[5];
-                String compras = userData[6];
-                //mudar para ler depois a lista de artigos atraves da string
-                ArrayList<Artigo> vendeu = new ArrayList<>();
-                ArrayList<Artigo> comprou = new ArrayList<>();
-                //passar String para lista de artigos
-                User user = new User(name, userId, email, morada, nif, vendeu, comprou);
+                User user = new User(name, userId, email, morada, nif);
                 usersList.add(user);
             }
             scanner.close();
@@ -88,11 +73,8 @@ public class User {
         String morada = scanner.nextLine();
         System.out.println("Enter Address:");
         String nif = scanner.nextLine();
-        ArrayList<Artigo> artigos = new ArrayList<>();
-        ArrayList<Artigo> vendeu = new ArrayList<>();
-        ArrayList<Artigo> comprou = new ArrayList<>();
         String userId = User.generateUserId(name);
-        User user = new User(name, userId, email, morada, nif, vendeu, comprou);
+        User user = new User(name, userId, email, morada, nif);
         writeUser(USERS_FILE, user);
         scanner.close();
         return userId;
@@ -159,15 +141,7 @@ public class User {
     @Override
     public User clone() throws CloneNotSupportedException {
         User clone = (User) super.clone();
-        List<Artigo> clonedVendeu = new ArrayList<>();
-        for (Artigo artigo : this.vendeu) {
-            clonedVendeu.add(artigo.clone());
-        }
-        List<Artigo> clonedComprou = new ArrayList<>();
-        for (Artigo artigo : this.comprou) {
-            clonedComprou.add(artigo.clone());
-        }
-        return new User(this.name, this.userId, this.email, this.morada, this.nif, clonedVendeu, clonedComprou);
+        return new User(this.name, this.userId, this.email, this.morada, this.nif);
     }
 
 
@@ -180,14 +154,12 @@ public class User {
                 Objects.equals(userId, u.userId) &&
                 Objects.equals(email, u.email) &&
                 Objects.equals(morada, u.morada) &&
-                Objects.equals(nif, u.nif) &&
-                Objects.equals(vendeu, u.vendeu) &&
-                Objects.equals(comprou, u.comprou);
+                Objects.equals(nif, u.nif);
     }
 
     @Override
     public String toString() {
-        return name + "," + userId + "," + email + "," + morada + "," + nif + "," + vendeu + "," + comprou;}
+        return name + "," + userId + "," + email + "," + morada + "," + nif;}
     }
 
 

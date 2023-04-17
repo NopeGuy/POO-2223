@@ -3,17 +3,21 @@ package Transportation;
 import Items.*;
 import Time.Data;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 public class Encomenda {
+    private String encomendaId;
     private Collection<Artigo> colecao;
     private int dimensao;
     private double preco_final;
     private String estado;
-    private final LocalDate data_criacao;
+    private LocalDate data_criacao;
     private String transportadora;
 
     // Construtor
@@ -36,9 +40,50 @@ public class Encomenda {
     }
 
 
+    //isto pode não estar bem, é só uma tentativa,
+    public void setColecao(Collection<Artigo> colecao) {
+        if (colecao == null) {
+            throw new IllegalArgumentException("A coleção de artigos não pode ser nula.");
+        }
+        this.colecao = new ArrayList<Artigo>();
+
+        for(Artigo a : colecao){
+            this.colecao.add(a.clone());
+        }
+    }
+
     // Métodos de acesso
+    public void setDimensao(int dimensao) {
+        this.dimensao = dimensao;
+    }
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.data_criacao = dataCriacao;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setPrecoFinal(double preco_final) {
+        this.preco_final = preco_final;
+    }
+
+    public void setTransportadora(String transportadora) {
+        this.transportadora = transportadora;
+    }
+    public void setEncomendaId(String encomendaId) {
+        this.encomendaId = encomendaId;
+    }
+
+
+    public String getEncomendaId() {
+        return encomendaId;
+    }
+
     public Collection<Artigo> getColecao() {
-        return new ArrayList<>(colecao);
+        ArrayList<Artigo> ret = new ArrayList<Artigo>();
+        for (Artigo a : this.colecao)
+            ret.add(a.clone());
+        return ret;
     }
 
     public int getDimensao() {
@@ -61,9 +106,22 @@ public class Encomenda {
 
     // Métodos de modificação
 
-    public void calcularPrecoFinal() {
+    public double calcularPrecoFinal(ArrayList<Artigo> colecao){
+        Transportadora t =  new Transportadora();
+        double precoEnvio = 0.0;
         double total = 0.0;
+        List<Transportadora> transportes = t.readDatabaseTransportadora();
+        t.printTransportadoras(transportes);//for debug
+
+
+
         for (Artigo artigo : colecao) {
+            for (int i = 0; i < transportes.size(); i++){
+                t = transportes.get(i);
+                if (artigo.getTransportadora().equals(t.getNome())){
+                    t.setTamanho(t.getTamanho() +1) ;
+                }
+            }
             if(artigo instanceof Mala) ((Mala) artigo).calculaPreco();
             if(artigo instanceof MalaPremium) ((MalaPremium) artigo).calculaPreco();
             if(artigo instanceof Sapatilha) ((Sapatilha) artigo).calculaPreco();
@@ -71,7 +129,15 @@ public class Encomenda {
             if(artigo instanceof Tshirt) ((Tshirt) artigo).calculaPreco();
             total += artigo.getPreco();
         }
-        this.preco_final = total;
+
+        for (Transportadora trans : transportes){
+            precoEnvio += trans.calculaTaxa(trans);
+        }
+
+        total += precoEnvio;
+
+
+        return total;
     }
     public void adicionarArtigo(Artigo artigo) {
         if(artigo.getStock()>0){
@@ -79,8 +145,8 @@ public class Encomenda {
             this.dimensao++;
             this.preco_final += artigo.getPreco();
             artigo.setStock(artigo.getStock()-1);
+            }
         }
-    }
     }
 
     public void removerArtigo(Artigo artigo) {
@@ -91,6 +157,16 @@ public class Encomenda {
         }
     }
 
+    public static void addEncomendaToFile(String userEmail, Encomenda encomenda) {
+        try {
+            FileWriter writer = new FileWriter("orders.txt", true);
+            String orderLine = userEmail + ":" + encomenda.toString() + "\n";
+            writer.write(orderLine);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 
 
 
@@ -123,17 +199,12 @@ public class Encomenda {
     @Override
     public String toString() {
         return "Encomenda{" +
-                "colecao=" + colecao +
-                ", dimensao='" + dimensao + '\'' +
-                ", preco_final=" + preco_final +
-                ", estado='" + estado + '\'' +
-                ", data_criacao=" + data_criacao +
+                "colecao: " + colecao +
+                " ID: " + encomendaId +
+                ", dimensao: " + dimensao +
+                ", preco_final: " + preco_final +
+                ", estado: " + estado +
+                ", data_criacao: " + data_criacao +
                 '}';
     }
-
 }
-
-//criar encomenda
-//adicionar artigos
-//calcular preço final = set preço final
-//devolver

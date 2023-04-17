@@ -1,7 +1,14 @@
 package Users;
 
-import java.io.*;
-import java.nio.file.Files;
+import Items.Artigo;
+import Items.Mala;
+import Items.Sapatilha;
+import Items.Tshirt;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -52,64 +59,56 @@ public class Purchases {
         }
     }
 
-    public static void printAllSalesExceptUser(String userEmail) {
-        String STOCK_DIRECTORY = "stock/";
-        File directory = new File(STOCK_DIRECTORY);
-        File[] files = directory.listFiles();
+    public static ArrayList<Artigo> getAllSales(String userEmail) {
+        ArrayList<Artigo> allItems = new ArrayList<>();
+        String[] stockFiles = new File("stock").list();
 
-        if (files == null) {
-            System.out.println("Directory " + STOCK_DIRECTORY + " does not exist.");
-            return;
-        }
+        assert stockFiles != null;
+        for (String stockFile : stockFiles) {
+            if (stockFile.equals(userEmail + ".txt")) continue; // Skip the user's own stock file
 
-        for (File file : files) {
-            if (file.getName().endsWith(".txt") && !file.getName().startsWith(userEmail)) {
-                try {
-                    Scanner scanner = new Scanner(file);
+            try (Scanner scanner = new Scanner(new File("stock/" + stockFile))) {
+                while (scanner.hasNextLine()) {
+                    String[] itemDetails = scanner.nextLine().split(":");
+                    String descricao = itemDetails[0];
+                    String marca = itemDetails[1];
+                    String itemId = itemDetails[2];
+                    String transport = itemDetails[3];
+                    Double preco = Double.parseDouble(itemDetails[4]);
+                    Double desconto = Double.parseDouble(itemDetails[5]);
+                    int num_donos = Integer.parseInt(itemDetails[6]);
+                    int stock = Integer.parseInt(itemDetails[7]);
 
-                    while (scanner.hasNextLine()) {
-                        String line = scanner.nextLine();
-                        String[] values = line.split(":");
-
-                        String itemType = values[2].substring(0, 2);
-
-                        switch (itemType) {
-                            case "TN":
-                                System.out.println("T-Shirt");
-                                System.out.println("Description: " + values[0] + ", Brand: " + values[1] + ", Item ID: " + values[2] + ", Transport Company: " + values[3]
-                                        + ", Price: " + values[4] + ", Discount: " + values[5] + ", Previous Owners: " + values[6] + ", Stock: " + values[7] + "\n"
-                                        + "Size: " + values[8] + ", Pattern: " + values[9] + "\n");
-                                break;
-                            case "SN":
-                                System.out.println("Shoe");
-                                System.out.println("Description: " + values[0] + ", Brand: " + values[1] + ", Item ID: " + values[2] + ", Transport Company: " + values[3]
-                                        + ", Price: " + values[4] + ", Discount: " + values[5] + ", Previous Owners: " + values[6] + ", Stock: " + values[7] + "\n" +
-                                        "Size: " + values[8] + ", Has shoelaces: " + values[9] + ", Color: " + values[10] + ", Collection Year: " + values[11] + "\n");
-                                break;
-                            case "HN":
-                                System.out.println("Handbag");
-                                System.out.println("Description: " + values[0] + ", Brand: " + values[1] + ", Item ID: " + values[2] + ", Transport Company: " + values[3]
-                                        + ", Price: " + values[4] + ", Discount: " + values[5] + ", Previous Owners: " + values[6] + ", Stock: " + values[7] + "\n" +
-                                        "Size: " + values[8] + ", Collection Year: " + values[9] + ", Material: " + values[10] + "\n");
-                                break;
-                            default:
-                                System.out.println("Unknown item type: " + itemType);
-                                break;
-                        }
+                    if (itemId.startsWith("SN")) {
+                        int tamanho = Integer.parseInt(itemDetails[8]);
+                        boolean atacadores = Boolean.parseBoolean(itemDetails[9]);
+                        String cor = itemDetails[10];
+                        int ano_colecao = Integer.parseInt(itemDetails[11]);
+                        allItems.add(new Sapatilha(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, tamanho, atacadores, cor, ano_colecao));
+                    } else if (itemId.startsWith("TN")) {
+                        String tamanho = itemDetails[8];
+                        String padrao = itemDetails[9];
+                        allItems.add(new Tshirt(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, tamanho, padrao));
+                    } else if (itemId.startsWith("HN")) {
+                        String dimensao = itemDetails[8];
+                        int ano_colecao = Integer.parseInt(itemDetails[9]);
+                        String material = itemDetails[10];
+                        allItems.add(new Mala(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, dimensao, ano_colecao, material));
                     }
-
-                    scanner.close();
-                } catch (FileNotFoundException e) {
-                    System.out.println("File not found: " + file.getName());
                 }
+            } catch (FileNotFoundException e) {
+                System.out.println("File not found: " + e.getMessage());
             }
         }
+        return allItems;
     }
+
+
     public static void removeItemFromUserStock(String userEmail, String itemId) {
         File folder = new File("stock/");
-        String BUY_FILE = "buyhistory.txt";
         File[] files = folder.listFiles();
 
+        assert files != null;
         for (File file : files) {
             if (file.getName().endsWith(".txt")) {
                 try {
@@ -130,14 +129,7 @@ public class Purchases {
                                 values[7] = Integer.toString(stock);
                                 line = String.join(":", values);
                             }
-
-                            // add the modified line to the buy history
-                            FileWriter buyWriter = new FileWriter(BUY_FILE, true);
-                            String buyLine = userEmail + ":" + line + "\n";
-                            buyWriter.write(buyLine);
-                            buyWriter.close();
                         }
-
                         lines.add(line);
                     }
 

@@ -1,13 +1,11 @@
-import java.util.*;
-
 import Time.Data;
-import Users.Purchases;
 import Users.User;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import static Users.BuyOrSell.buyOrSellArticle;
 import static Users.User.*;
-import static Users.Buy.*;
-import static Users.Sell.*;
 
 public class UserSellerManager {
 
@@ -20,19 +18,25 @@ public class UserSellerManager {
             boolean loggedIn = false;
             String userId = "";
             String userEmail = "";
+            //Para inicializar em que data começa
+            Data.startTempo();
             while (!loggedIn) {
                 System.out.println("\\Welcome to Vintagio/");
                 System.out.println("Choose an option:");
                 System.out.println("1. Log in");
                 System.out.println("2. Create new user");
+                System.out.println("0. Quit");
                 int choice = scanner.nextInt();
                 switch (choice) {
+                    case 0:
+                        System.out.println("Exiting program...");
+                        System.exit(0);
                     case 1:
                         System.out.println("Enter user email:");
                         userEmail = scanner.next();
                         ArrayList<User> usersList = readUsers(USERS_FILE);
                         if (loginUser(userEmail, usersList)) {
-                            System.out.println("Logged in as user with email " + userEmail + "\n");
+                            System.out.println("Logged in as user with email: " + userEmail + "\n");
                             loggedIn = true;
                             running = false;
                         } else {
@@ -48,7 +52,6 @@ public class UserSellerManager {
                         break;
                 }
             }
-                Data.startTempo();
             buyOrSellArticle(userEmail);
         }
     }

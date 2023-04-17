@@ -22,7 +22,7 @@ public class Sell {
         String SELL_FILE = "sellhistory.txt";
 
         while(running) {
-            System.out.println("Select which article to sell: 1) Shoes, 2) Premium Shoes, 3) Handbags, 4) Premium Handbags, 5) T-Shirts, 0) Exit:");
+            System.out.println("Select which article to sell: \n1) Shoes \n2) Premium Shoes \n3) Handbags \n4) Premium Handbags \n5) T-Shirts \n\n0) Exit:");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:

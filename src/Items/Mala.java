@@ -5,7 +5,6 @@ import Time.Data;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Mala extends Artigo {
@@ -73,7 +72,7 @@ public class Mala extends Artigo {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Mala: ").append(super.toString()).append("Dimensao: ").append(this.dimensao).append("Ano da colecao: ").append(this.ano_colecao).append("Material: ").append(this.material);
+        sb.append("Mala-> ").append(super.toString()).append("Dimensao: ").append(this.dimensao).append(", Ano da colecao: ").append(this.ano_colecao).append(", Material: ").append(this.material);
         return sb.toString();
     }
 
@@ -147,8 +146,7 @@ public class Mala extends Artigo {
         System.out.print("Enter price: ");
         double preco = Double.parseDouble(scanner.nextLine().trim());
 
-        System.out.print("Enter discount: ");
-        double desconto = Double.parseDouble(scanner.nextLine().trim());
+        double desconto = 0.0;
 
         System.out.print("Enter number of previous owners: ");
         int numDonos = Integer.parseInt(scanner.nextLine().trim());
@@ -208,7 +206,7 @@ public class Mala extends Artigo {
     public static void printHandbagToFile(Mala mala, String filename) {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
-            writer.println(mala.toString2() + ",");
+            writer.println(mala.toString2());
             writer.close();
         } catch (IOException e) {
             System.out.println("Failed to print Handbag to file.");
@@ -218,7 +216,7 @@ public class Mala extends Artigo {
     public static void printHandbagToFileHistory(String userEmail, Mala mala, String filename) {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(filename, true));
-            writer.println(userEmail + ":" + mala.toString2() + ",");
+            writer.println(userEmail + ":" + mala.toString2());
             writer.close();
         } catch (IOException e) {
             System.out.println("Failed to print Handbag to file history.");
