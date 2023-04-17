@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 public class Encomenda {
@@ -106,8 +107,21 @@ public class Encomenda {
     // Métodos de modificação
 
     public double calcularPrecoFinal(ArrayList<Artigo> colecao){
+        Transportadora t =  new Transportadora();
+        double precoEnvio = 0.0;
         double total = 0.0;
+        List<Transportadora> transportes = t.readDatabaseTransportadora();
+        t.printTransportadoras(transportes);//for debug
+
+
+
         for (Artigo artigo : colecao) {
+            for (int i = 0; i < transportes.size(); i++){
+                t = transportes.get(i);
+                if (artigo.getTransportadora().equals(t.getNome())){
+                    t.setTamanho(t.getTamanho() +1) ;
+                }
+            }
             if(artigo instanceof Mala) ((Mala) artigo).calculaPreco();
             if(artigo instanceof MalaPremium) ((MalaPremium) artigo).calculaPreco();
             if(artigo instanceof Sapatilha) ((Sapatilha) artigo).calculaPreco();
@@ -115,6 +129,14 @@ public class Encomenda {
             if(artigo instanceof Tshirt) ((Tshirt) artigo).calculaPreco();
             total += artigo.getPreco();
         }
+
+        for (Transportadora trans : transportes){
+            precoEnvio += trans.calculaTaxa(trans);
+        }
+
+        total += precoEnvio;
+
+
         return total;
     }
     public void adicionarArtigo(Artigo artigo) {

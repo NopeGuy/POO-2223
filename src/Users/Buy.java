@@ -28,7 +28,6 @@ public class Buy {
 
             int choice;
             while (true) {
-                System.out.print("Please enter an integer: ");
                 if (scanner.hasNextInt()) {
                     choice = scanner.nextInt();
                     break;
