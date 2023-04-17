@@ -28,6 +28,8 @@ public class BuyOrSell {
                 case 5:
                     Data.addDays();
                     System.out.println("Date advanced to " + Data.tempo + "\n");
+                    //update estado encomenda
+                    //print updates to encomenda
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
