@@ -3,8 +3,10 @@ package Transportation;
 import Items.*;
 import Time.Data;
 
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -172,6 +174,38 @@ public class Encomenda {
 
     public boolean validaDevolucao(){
         return !this.data_criacao.isBefore(Data.tempo.minusDays(2));
+    }
+
+    public void atualizarEstadoEncomendas(){
+        String inputFile = "orders.txt";
+        LocalDate test = LocalDate.parse("2023-04-19");
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.contains("estado: Em transito")) {
+                    String[] parts = line.split("data_criacao: ");
+                    String dateString = parts[1].substring(0, 10);
+                    LocalDate dataCriacao = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
+                    LocalDate twoDaysAgo = LocalDate.now().minusDays(2);
+                    if (dataCriacao.isBefore(twoDaysAgo)) {
+                        line = line.replace("estado: Em transito", "estado: entregue");
+                    }
+                }
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (FileWriter writer = new FileWriter(inputFile)) {
+            for (String line : lines) {
+                writer.write(line + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // Métodos sobrescritos

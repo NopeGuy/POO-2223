@@ -1,6 +1,7 @@
 package Users;
 
 import Time.Data;
+import Transportation.Encomenda;
 
 import java.util.Scanner;
 
@@ -8,6 +9,7 @@ public class BuyOrSell {
     public static void buyOrSellArticle(String userEmail) {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
+        Encomenda e = new Encomenda(); //só para importar o método ataulizar estado
 
         while(running) {
             System.out.println("\"Welcome to the shop, here to: \n1) Buy \n2) Sell \n3) Buy history \n4) Sell history \n5) Advance date\n0 - exit ");
@@ -31,7 +33,7 @@ public class BuyOrSell {
                 case 5:
                     Data.addDays();
                     System.out.println("Date advanced to " + Data.tempo + "\n");
-                    //update estado encomenda
+                    e.atualizarEstadoEncomendas();
                     //print updates to encomenda
                     break;
                 default:
