@@ -32,7 +32,7 @@ public class Purchases {
                             System.out.println("T-Shirt");
                             System.out.println("Description: " + values[1] + ", Brand: " + values[2] + ", Item ID: " + values[3] + ", Transport Company: " + values[4]
                                     + ", Price: " + values[5] + ", Discount: " + values[6] + ", Previous Owners: " + values[7] + ", Stock: " + values[8] + "\n"
-                            + "Size: " + values[9] + ", Pattern: " + values[10] + "\n");
+                                    + "Size: " + values[9] + ", Pattern: " + values[10] + "\n");
                             break;
                         case "SN":
                             System.out.println("Shoe");
@@ -52,7 +52,9 @@ public class Purchases {
                     }
                 }
             }
-            if (itemType.equals("")){System.out.println("No items found.");}
+            if (itemType.equals("")) {
+                System.out.println("No items found.");
+            }
             scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + FILE);
@@ -147,5 +149,9 @@ public class Purchases {
                 }
             }
         }
+    }
+
+    public static void atualizaPrecoStock(String userEmail) {
+
     }
 }

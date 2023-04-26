@@ -13,6 +13,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import static Time.Data.tempo;
+
 public class Encomenda {
     private String encomendaId;
     private Collection<Artigo> colecao;
@@ -173,12 +175,12 @@ public class Encomenda {
 
 
     public boolean validaDevolucao(){
-        return !this.data_criacao.isBefore(Data.tempo.minusDays(2));
+        return !this.data_criacao.isBefore(tempo.minusDays(2));
     }
 
-    public void atualizarEstadoEncomendas(){
+    public static void atualizarEstadoEncomendas(){
         String inputFile = "orders.txt";
-        LocalDate test = LocalDate.parse("2023-04-19");
+        LocalDate twoDaysAgo = tempo.minusDays(2);
         List<String> lines = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
@@ -188,7 +190,6 @@ public class Encomenda {
                     String[] parts = line.split("data_criacao: ");
                     String dateString = parts[1].substring(0, 10);
                     LocalDate dataCriacao = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
-                    LocalDate twoDaysAgo = LocalDate.now().minusDays(2);
                     if (dataCriacao.isBefore(twoDaysAgo)) {
                         line = line.replace("estado: Em transito", "estado: entregue");
                     }
