@@ -17,7 +17,7 @@ public class Buy {
     public static void buyArticle(String userEmail) {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
-        Encomenda encomenda = new Encomenda(new ArrayList<>(),0,0.0,"Em transito", Data.tempo,""); //verificar a transportadora
+        Encomenda encomenda = new Encomenda(new ArrayList<>(),0,0.0,"Em transito", Data.tempo,userEmail, ""); //verificar a transportadora
         String BUY_FILE = "buyhistory.txt";
         ArrayList<Artigo> cart = new ArrayList<>();
         ArrayList<Artigo> stock = getAllSales(userEmail);

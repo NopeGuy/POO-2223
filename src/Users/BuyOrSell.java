@@ -31,6 +31,7 @@ public class BuyOrSell {
                     Purchases.printUserSales(userEmail, "sellhistory.txt");
                     break;
                 case 5:
+                    Pack.packagesMenu(userEmail);
                     break;
                 case 6:
                     Data.addDays();

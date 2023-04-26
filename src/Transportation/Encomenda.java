@@ -2,6 +2,7 @@ package Transportation;
 
 import Items.*;
 import Time.Data;
+import Users.Purchases;
 
 
 import java.io.*;
@@ -22,26 +23,94 @@ public class Encomenda {
     private double preco_final;
     private String estado;
     private LocalDate data_criacao;
-    private String transportadora;
+    private String buyerEmail;
 
     // Construtor
-    public Encomenda(Collection<Artigo> colecao, int dimensao, double preco_final, String estado, LocalDate data_criacao,String transportadora) {
+    public Encomenda(Collection<Artigo> colecao, int dimensao, double preco_final, String estado, LocalDate data_criacao,String buyerEmail, String id) {
         this.colecao = new ArrayList<>(colecao);
         this.dimensao = dimensao;
         this.preco_final = preco_final;
         this.estado = estado;
         this.data_criacao = data_criacao;
-        this.transportadora=transportadora;
+        this.buyerEmail=buyerEmail;
+        this.encomendaId=id;
     }
     // Construtor de cópia
     public Encomenda(Encomenda encomenda) {
-        this(encomenda.colecao, encomenda.dimensao, encomenda.preco_final, encomenda.estado, encomenda.data_criacao,encomenda.transportadora);
+        this(encomenda.colecao, encomenda.dimensao, encomenda.preco_final, encomenda.estado, encomenda.data_criacao,encomenda.buyerEmail, encomenda.encomendaId);
     }
 
     // Construtor vazio
     public Encomenda() {
-        this(new ArrayList<>(), 0, 0.0, "", LocalDate.now(),"");
+        this(new ArrayList<>(), 0, 0.0, "", LocalDate.now(),"", "");
     }
+
+    public static ArrayList<Encomenda> readPackagesFromFile() {
+        ArrayList<Encomenda> encomendas = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("orders.txt"));
+            String line = reader.readLine();
+            while (line != null) {
+                String[] parts = line.split(";");
+                String buyerEmail = parts[0];
+                String colecao = parts[1];
+                String ID = parts[2];
+                int dimensao = Integer.parseInt(parts[3]);
+                double preco_final = Double.parseDouble(parts[4]);
+                String estado =parts[5];
+                LocalDate data = LocalDate.parse(parts[6]);
+
+                Collection<Artigo> artigos = null;
+                artigos = Purchases.getArtigosFromString(colecao);
+
+                Encomenda encomenda = new Encomenda(artigos, dimensao, preco_final, estado, data,buyerEmail, ID);
+                encomendas.add(encomenda);
+
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return encomendas;
+    }
+    public static void removePackageFromFile(String packageID) {
+        File inputFile = new File("orders.txt");
+        File tempFile = new File("temp.txt");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts.length > 3 && parts[2].equals(packageID) && parts[5].equals("Em transito")){
+                    System.out.println("\nPackage removed.\n");
+                    continue;
+                }
+                else{
+                    System.out.println("\nValid package not found.");
+                }
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("An error occurred while reading/writing the file: " + e.getMessage());
+            return;
+        }
+
+        if (!inputFile.delete()) {
+            System.err.println("Could not delete the input file.");
+            return;
+        }
+
+        if (!tempFile.renameTo(inputFile)) {
+            System.err.println("Could not rename the temporary file.");
+        }
+
+    }
+
 
 
     //isto pode não estar bem, é só uma tentativa,
@@ -71,8 +140,8 @@ public class Encomenda {
         this.preco_final = preco_final;
     }
 
-    public void setTransportadora(String transportadora) {
-        this.transportadora = transportadora;
+    public void setBuyerEmail(String buyerEmail) {
+        this.buyerEmail = buyerEmail;
     }
     public void setEncomendaId(String encomendaId) {
         this.encomendaId = encomendaId;
@@ -106,7 +175,7 @@ public class Encomenda {
         return data_criacao;
     }
 
-    public String getTransportadora(){return transportadora;}
+    public String getBuyerEmail(){return buyerEmail;}
 
     // Métodos de modificação
 
@@ -164,18 +233,12 @@ public class Encomenda {
     public static void addEncomendaToFile(String userEmail, Encomenda encomenda) {
         try {
             FileWriter writer = new FileWriter("orders.txt", true);
-            String orderLine = userEmail + ":" + encomenda.toString() + "\n";
+            String orderLine = userEmail + encomenda.toString() + "\n";
             writer.write(orderLine);
             writer.close();
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
-    }
-
-
-
-    public boolean validaDevolucao(){
-        return !this.data_criacao.isBefore(tempo.minusDays(2));
     }
 
     public static void atualizarEstadoEncomendas(){
@@ -233,9 +296,16 @@ public class Encomenda {
     }
     @Override
     public String toString() {
+        return  ";" + colecao +
+                ";" + encomendaId +
+                ";" + dimensao +
+                ";" + preco_final +
+                ";" + estado +
+                ";" + data_criacao;
+    }
+    public String toString2() {
         return "Encomenda{" +
-                "colecao: " + colecao +
-                " ID: " + encomendaId +
+                "ID: " + encomendaId +
                 ", dimensao: " + dimensao +
                 ", preco_final: " + preco_final +
                 ", estado: " + estado +

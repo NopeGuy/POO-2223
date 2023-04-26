@@ -1,6 +1,7 @@
 import Time.Data;
 import Users.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class UserSellerManager {
 
     private static final String USERS_FILE = "users.txt";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         while (running) {
