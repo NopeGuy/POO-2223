@@ -31,14 +31,11 @@ public class BuyOrSell {
                     Purchases.printUserSales(userEmail, "sellhistory.txt");
                     break;
                 case 5:
-
                     break;
                 case 6:
                     Data.addDays();
                     System.out.println("Date advanced to " + Data.tempo + "\n");
-                    Purchases.atualizaPrecoStock(userEmail);
                     Encomenda.atualizarEstadoEncomendas();
-                    //print updates to encomenda
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");

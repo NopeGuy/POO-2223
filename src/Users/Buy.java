@@ -95,7 +95,8 @@ public class Buy {
                             totalPrice += artigo.getPreco();
                         }
                         int id = (int) (Math.random() * 100000);
-                        encomenda.setEncomendaId(String.valueOf(id));                        encomenda.setColecao(cart);
+                        encomenda.setEncomendaId(String.valueOf(id));
+                        encomenda.setColecao(cart);
                         encomenda.setDimensao(cart.size());
                         encomenda.setPrecoFinal(totalPrice);
                         encomenda.setEstado("Em transito");

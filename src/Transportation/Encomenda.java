@@ -191,7 +191,7 @@ public class Encomenda {
                     String dateString = parts[1].substring(0, 10);
                     LocalDate dataCriacao = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
                     if (dataCriacao.isBefore(twoDaysAgo)) {
-                        line = line.replace("estado: Em transito", "estado: entregue");
+                        line = line.replace("estado: Em transito", "estado: Entregue");
                     }
                 }
                 lines.add(line);

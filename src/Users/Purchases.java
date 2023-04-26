@@ -150,8 +150,4 @@ public class Purchases {
             }
         }
     }
-
-    public static void atualizaPrecoStock(String userEmail) {
-
-    }
 }

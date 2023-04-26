@@ -109,7 +109,7 @@ public class Transportadora {
         List<Transportadora> transportadoras = new ArrayList<>();
         try {
             // Abrir o database.txt
-            File file = new File("POOTP2223/src/Transportation/transportadoras.txt");
+            File file = new File("src/Transportation/transportadoras.txt");
             Scanner scanner = new Scanner(file);
 
             // Read the file line by line
