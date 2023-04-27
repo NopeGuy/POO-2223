@@ -1,0 +1,2 @@
+boda:bods:SN20612:UPS:677.0:0.0:0:12:39:false:black:2000
+asd:asd:SN73389:CTT:200.0:0.0:3:1:25:false:black:2022

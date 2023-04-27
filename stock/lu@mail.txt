@@ -1,1 +1,1 @@
-Shoe:niko:SN312000:UPS:1000000.0:3.0:0:1:38:false:black:3018
+THIS:ONE:HN3648:UPS:25.0:0.0:3:191:large:2000:leather

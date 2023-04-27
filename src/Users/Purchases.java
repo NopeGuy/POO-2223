@@ -105,7 +105,6 @@ public class Purchases {
         return allItems;
     }
 
-//ainda n funciona direito
     public static String extractItem(String input) {
         String[] parts = input.split("->");
 
@@ -195,6 +194,10 @@ public class Purchases {
                                 stock--;
                                 values[7] = Integer.toString(stock);
                                 line = String.join(":", values);
+                                // Write the removed line to buyhistory.txt
+                                FileWriter historyWriter = new FileWriter("buyhistory.txt", true);
+                                historyWriter.write(userEmail + ":" + line + "\n");
+                                historyWriter.close();
                             }
                         }
                         lines.add(line);

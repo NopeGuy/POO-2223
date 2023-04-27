@@ -25,7 +25,7 @@ public class BuyOrSell {
                     Sell.sellArticle(userEmail);
                     break;
                 case 3:
-                    //do later
+                    Purchases.printUserSales(userEmail, "buyhistory.txt");
                     break;
                 case 4:
                     Purchases.printUserSales(userEmail, "sellhistory.txt");
