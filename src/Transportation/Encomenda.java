@@ -78,6 +78,7 @@ public class Encomenda {
     public static void removePackageFromFile(String packageID) {
         File inputFile = new File("orders.txt");
         File tempFile = new File("temp.txt");
+        boolean encontrou=false;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
              BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
@@ -87,10 +88,8 @@ public class Encomenda {
                 String[] parts = line.split(";");
                 if (parts.length > 3 && parts[2].equals(packageID) && parts[5].equals("Em transito")){
                     System.out.println("\nPackage removed.\n");
+                    encontrou=true;
                     continue;
-                }
-                else{
-                    System.out.println("\nValid package not found.");
                 }
                 writer.write(line);
                 writer.newLine();
@@ -108,12 +107,10 @@ public class Encomenda {
         if (!tempFile.renameTo(inputFile)) {
             System.err.println("Could not rename the temporary file.");
         }
-
+        if(!encontrou) System.out.println("\nValid package not found.");
     }
 
 
-
-    //isto pode não estar bem, é só uma tentativa,
     public void setColecao(Collection<Artigo> colecao) {
         if (colecao == null) {
             throw new IllegalArgumentException("A coleção de artigos não pode ser nula.");
@@ -249,12 +246,12 @@ public class Encomenda {
         try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
             String line;
             while ((line = br.readLine()) != null) {
-                if (line.contains("estado: Em transito")) {
-                    String[] parts = line.split("data_criacao: ");
-                    String dateString = parts[1].substring(0, 10);
+                if (line.contains("Em transito")) {
+                    String[] parts = line.split(";");
+                    String dateString = parts[6];
                     LocalDate dataCriacao = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
                     if (dataCriacao.isBefore(twoDaysAgo)) {
-                        line = line.replace("estado: Em transito", "estado: Entregue");
+                        line = line.replace("Em transito", "Entregue");
                     }
                 }
                 lines.add(line);
