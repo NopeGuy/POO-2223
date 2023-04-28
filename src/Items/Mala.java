@@ -138,7 +138,7 @@ public class Mala extends Artigo {
                 transportadora = "UPS";
                 break;
             default:
-                System.out.println("Invalid dimension. Setting to GLS.");
+                System.out.println("Invalid tranportation company. Setting to GLS.");
                 transportadora = "GLS";
                 break;
         }
