@@ -53,6 +53,9 @@ public class Buy {
                             cart.add(artigo);
                             System.out.println("Item added to cart.");
                             break;
+                        } else {
+                            System.out.println("ID inserido não existe, voltando ao menu de compra.");
+                            break;
                         }
                     }
                     break;
