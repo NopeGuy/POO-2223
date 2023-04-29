@@ -1,14 +1,11 @@
 package Transportation;
 
 import Items.*;
-import Time.Data;
 import Users.Purchases;
 
-
 import java.io.*;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -181,9 +178,6 @@ public class Encomenda {
         double precoEnvio = 0.0;
         double total = 0.0;
         List<Transportadora> transportes = t.readDatabaseTransportadora();
-        t.printTransportadoras(transportes);//for debug
-
-
 
         for (Artigo artigo : colecao) {
             for (int i = 0; i < transportes.size(); i++){

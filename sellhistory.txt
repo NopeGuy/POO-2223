@@ -13,3 +13,4 @@ josemariapirilau@gmail.com:asd:asd:HN96812:CTT:25.0:0.0:0:2:small:2000:leather
 a:boda:bods:SN20612:UPS:677.0:0.0:0:12:39:false:black:2000
 lu@mail:THIS:ONE:HN3648:UPS:25.0:0.0:3:200:large:2000:leather
 a:asd:asd:SN73389:CTT:200.0:0.0:3:1:25:false:black:2022
+isabela@boda.com:isabela:valnisios:TN75472:CTT:34790.0:0.0:1:10000:M:plain

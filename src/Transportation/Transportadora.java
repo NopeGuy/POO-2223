@@ -1,10 +1,19 @@
 package Transportation;
 
+import Users.BuyOrSell;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static Users.BuyOrSell.buyOrSellArticle;
 
 public class Transportadora {
     private String nome;
@@ -96,15 +105,43 @@ public class Transportadora {
 
     @Override
     public String toString() {
-        return "Transportadora{" +
-                "nome='" + nome + '\'' +
-                ", preço_pequena=" + preço_pequena +
-                ", preço_media=" + preço_media +
-                ", preço_grande=" + preço_grande +
-                '}';
+        return  "Name='" + nome + '\'' +
+                ", Small=" + preço_pequena +
+                ", Medium=" + preço_media +
+                ", Big=" + preço_grande;
     }
 
-    public List<Transportadora> readDatabaseTransportadora() {
+
+    public static void transporteMenu(String userEmail){
+        Boolean running = true;
+        List<Transportadora> transportes = readDatabaseTransportadora();
+        Scanner scanner = new Scanner(System.in);
+
+        while(running) {
+            System.out.println("\nAvailable carriers and prices:\n");
+            printTransportadoras(transportes);
+            System.out.println("\nDo you wish to:\n 1. Add a new carrier\n 2. Remove a carrier\n 0. Go back");
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    addTransportadora(transportes);
+                    break;
+                case 2:
+                    System.out.println("What is the name of the carrier you wish to remove?\n");
+                    String nome = scanner.next();
+                    removeTransportadora(nome, transportes);
+                    break;
+                case 0:
+                    buyOrSellArticle(userEmail);
+                    break;
+                default:
+                    System.out.println("Invalid option.");
+                    break;
+            }
+        }
+
+    }
+    public static List<Transportadora> readDatabaseTransportadora() {
         // Criar lista para guardas os objetos do tipo transportadora
         List<Transportadora> transportadoras = new ArrayList<>();
         try {
@@ -139,9 +176,68 @@ public class Transportadora {
         return transportadoras;
     }
 
-    public void printTransportadoras(List<Transportadora> transportadoras){
+    public static void printTransportadoras(List<Transportadora> transportadoras){
         for (Transportadora transportadora : transportadoras) {
             System.out.println(transportadora);
+        }
+    }
+    public static void addTransportadora(List<Transportadora> transportadoras) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Name of the carrier: ");
+        String nome = scanner.nextLine().trim();
+
+        System.out.print("Price for small package: ");
+        double precoPequena = scanner.nextDouble();
+        System.out.print("Price for medium package: ");
+        double precoMedia = scanner.nextDouble();
+        System.out.print("Price for large package: ");
+        double precoGrande = scanner.nextDouble();
+
+        Transportadora transportadora = new Transportadora(nome, precoPequena, precoMedia, precoGrande);
+        transportadoras.add(transportadora);
+
+        try {
+            FileWriter writer = new FileWriter("src/Transportation/transportadoras.txt", true);
+            writer.write(nome + "," + precoPequena + "," + precoMedia + "," + precoGrande + "\n");
+            writer.close();
+            System.out.println("\nCarrier added successfully.");
+        } catch (IOException e) {
+            System.out.println("\nError while adding carrier to file.");
+        }
+    }
+
+    public static void removeTransportadora(String name, List<Transportadora> transportadoras) {
+        try {
+            File tempFile = new File("temp.txt");
+            FileWriter tempWriter = new FileWriter(tempFile);
+            transportadoras.removeIf(transportadora -> transportadora.getNome().equals(name));
+
+            File file = new File("src/Transportation/transportadoras.txt");
+            Scanner scanner = new Scanner(file);
+            boolean found = false;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.startsWith(name + ",")) {
+                    found = true;
+                    continue;
+                }
+                tempWriter.write(line + "\n");
+            }
+            scanner.close();
+            tempWriter.close();
+
+            if (!found) {
+                System.out.println("Carrier not found.");
+                tempFile.delete();  // Delete the temporary file if the transportadora was not found
+            } else {
+                // Replace the transportadora file with the temporary file
+                Files.move(tempFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Carrier removed successfully.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while removing the carrier.");
+            e.printStackTrace();
         }
     }
 

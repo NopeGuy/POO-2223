@@ -1,1 +1,10 @@
-a,Ua486,a,a,a,[],[]
+a,Ua405,a,a,a
+Luis,ULuis467,lu@mail,260,guima
+Jose Maria,UJose Maria895,josemariapirilau@gmail.com,69696969,Rua das putas nº 69
+Serafim,USerafim487,sera@mail,2,guima
+boda,Uboda379,boda,123,123
+ricki,Uricki5,ricki@ugay,69420,gay street
+lu,Ulu363,lu,22,2222
+asd,Uasd111,ugh2,230284,lasdk
+ugh,Uugh257,ugh3,12398,aksldja
+isabela@boda.com,Uugh257,ugh3,12398,aksldja
