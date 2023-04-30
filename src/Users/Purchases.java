@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class Purchases {
     public static void printUserSales(String email, String FILE) {
-
         try {
             Scanner scanner = new Scanner(new File(FILE));
             String itemType = "";
@@ -133,6 +132,7 @@ public class Purchases {
         return "";
     }
 
+    /* 
     public static ArrayList<Artigo> getArtigosFromString(String colecao) {
         ArrayList<Artigo> allItems = new ArrayList<>();
 
@@ -189,8 +189,7 @@ public class Purchases {
         }
         return allItems;
     }
-
-
+*/
 
 
     public static void removeItemFromUserStock(String userEmail, String itemId) {

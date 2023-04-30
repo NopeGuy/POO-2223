@@ -49,18 +49,19 @@ public class Encomenda {
             String line = reader.readLine();
             while (line != null) {
                 String[] parts = line.split(";");
+
+                String[] items = parts[1].split("|");
                 String buyerEmail = parts[0];
-                String colecao = parts[1];
                 String ID = parts[2];
                 int dimensao = Integer.parseInt(parts[3]);
                 double preco_final = Double.parseDouble(parts[4]);
-                String estado =parts[5];
+                String estado = parts[5];
                 LocalDate data = LocalDate.parse(parts[6]);
 
-                Collection<Artigo> artigos = null;
-                artigos = Purchases.getArtigosFromString(colecao);
+                // Extract the artigos from the second part
+                Collection<Artigo> artigos = new ArrayList<>();
 
-                Encomenda encomenda = new Encomenda(artigos, dimensao, preco_final, estado, data,buyerEmail, ID);
+                Encomenda encomenda = new Encomenda(artigos, dimensao, preco_final, estado, data, buyerEmail, ID);
                 encomendas.add(encomenda);
 
                 line = reader.readLine();
@@ -69,9 +70,9 @@ public class Encomenda {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return encomendas;
     }
+
     public static void removePackageFromFile(String packageID) {
         File inputFile = new File("orders.txt");
         File tempFile = new File("temp.txt");
@@ -224,7 +225,14 @@ public class Encomenda {
     public static void addEncomendaToFile(String userEmail, Encomenda encomenda) {
         try {
             FileWriter writer = new FileWriter("orders.txt", true);
-            String orderLine = userEmail + encomenda.toString() + "\n";
+            StringBuilder collectionLine = new StringBuilder();
+            collectionLine.append("|");
+            for (Artigo a : encomenda.getColecao()) {
+                collectionLine.append(a.toString2()).append("|");
+            }
+            String orderLine = userEmail + ";" + "[" + collectionLine + "]" + ";" + encomenda.getEncomendaId() + ";"
+                    + encomenda.getDimensao() + ";" + encomenda.getPreco_final() + ";" + encomenda.getEstado() + ";"
+                    + encomenda.getData_criacao() + "\n";
             writer.write(orderLine);
             writer.close();
         } catch (IOException e) {
@@ -297,6 +305,7 @@ public class Encomenda {
     public String toString2() {
         return "Encomenda{" +
                 "ID: " + encomendaId +
+                ", colecao: " + colecao +
                 ", dimensao: " + dimensao +
                 ", preco_final: " + preco_final +
                 ", estado: " + estado +

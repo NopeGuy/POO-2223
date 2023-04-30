@@ -1,7 +1,6 @@
 package Transportation;
 
 import Users.BuyOrSell;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
