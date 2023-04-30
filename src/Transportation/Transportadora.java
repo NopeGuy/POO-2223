@@ -1,7 +1,6 @@
 package Transportation;
 
 import Users.BuyOrSell;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.io.File;
 import java.io.FileNotFoundException;
