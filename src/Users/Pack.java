@@ -23,7 +23,7 @@ public class Pack {
         }
 
         while(running) {
-            System.out.println("\nSelect: \n1)Return Article\n0) Exit:");
+            System.out.println("\nSelect: \n 1)Return Article\n\n  0) Exit:");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:

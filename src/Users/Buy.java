@@ -24,7 +24,7 @@ public class Buy {
         String itemId;
 
         while(running) {
-            System.out.println("Select if you want to:\n1) See the stock\n2) Add an item to your shopping cart\n3) Remove an item from your shopping cart\n4) Display shopping cart\n5) Buy shopping cart\n\n0) exit:");
+            System.out.println("Select if you want to:\n 1) See the stock\n 2) Add an item to your shopping cart\n 3) Remove an item from your shopping cart\n 4) Display shopping cart\n 5) Buy shopping cart\n\n  0) exit:");
 
             int choice;
             while (true) {
@@ -53,8 +53,9 @@ public class Buy {
                             cart.add(artigo);
                             System.out.println("Item added to cart.");
                             break;
-                        } else {
-                            System.out.println("ID inserido não existe, voltando ao menu de compra.");
+                        }
+                        else {
+                            System.out.println("Inserted ID doesn't exist.\n");
                             break;
                         }
                     }

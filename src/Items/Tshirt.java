@@ -1,10 +1,15 @@
 package Items;
 
 
+import Transportation.Transportadora;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Scanner;
+
+import static Transportation.Transportadora.readDatabaseTransportadora;
 
 public class Tshirt extends Artigo{
     private String tamanho;
@@ -98,23 +103,24 @@ public class Tshirt extends Artigo{
         System.out.print("Enter t-shirt brand: ");
         String marca = scanner.nextLine().trim();
 
-        System.out.print("Enter transport company name: 1)GLS, 2)CTT, 3)DPD: ");
-        int choice = Integer.parseInt(scanner.nextLine().trim());
+        List<Transportadora> transportes = readDatabaseTransportadora();
+        Transportadora.printTransportadoras(transportes);
         String transportadora = "";
-        switch (choice) {
-            case 1:
-                transportadora = "GLS";
+        while (true) {
+            System.out.print("Enter transport company name: ");
+            transportadora = scanner.nextLine().trim();
+            boolean exists = false;
+            for (Transportadora t : transportes) {
+                if (t.getNome().equals(transportadora)) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (exists) {
                 break;
-            case 2:
-                transportadora = "CTT";
-                break;
-            case 3:
-                transportadora = "UPS";
-                break;
-            default:
-                System.out.println("Invalid dimension. Setting to GLS.");
-                transportadora = "GLS";
-                break;
+            } else {
+                System.out.println("Transport company not found. Please enter a valid transport company.");
+            }
         }
 
         System.out.print("Enter price: ");
@@ -134,7 +140,7 @@ public class Tshirt extends Artigo{
         }
 
         System.out.print("Enter a shirt size: 1)S, 2)M, 3)L, 4)XL: ");
-        choice = Integer.parseInt(scanner.nextLine().trim());
+        int choice = Integer.parseInt(scanner.nextLine().trim());
         String tamanho = "";
         switch (choice) {
             case 1:

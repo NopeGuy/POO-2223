@@ -24,9 +24,9 @@ public class UserSellerManager {
             while (!loggedIn) {
                 System.out.println("\\Welcome to Vintagio/");
                 System.out.println("Choose an option:");
-                System.out.println("1. Log in");
-                System.out.println("2. Create new user");
-                System.out.println("0. Quit");
+                System.out.println(" 1. Log in");
+                System.out.println(" 2. Create new user");
+                System.out.println("  0. Quit");
                 int choice = scanner.nextInt();
                 switch (choice) {
                     case 0:
