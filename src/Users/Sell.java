@@ -1,15 +1,17 @@
 package Users;
 
-import Items.Mala;
-import Items.Sapatilha;
-import Items.Tshirt;
+import Items.*;
 
 import java.util.Scanner;
 
 import static Items.Mala.printHandbagToFile;
 import static Items.Mala.printHandbagToFileHistory;
+import static Items.MalaPremium.printPremiumHandbagToFile;
+import static Items.MalaPremium.printPremiumHandbagToFileHistory;
 import static Items.Sapatilha.printShoeToFile;
 import static Items.Sapatilha.printShoetoFileHistory;
+import static Items.SapatilhaPremium.printPremiumShoeToFile;
+import static Items.SapatilhaPremium.printPremiumShoetoFileHistory;
 import static Items.Tshirt.printTshirtToFile;
 import static Items.Tshirt.printTshirtToFileHistory;
 import static Users.BuyOrSell.buyOrSellArticle;
@@ -32,10 +34,9 @@ public class Sell {
 
                     break;
                 case 2:
-                    /*
                     SapatilhaPremium nova2 = SapatilhaPremium.createPremiumShoe();
                     printPremiumShoeToFile(nova2, ARTICLES_FILE);
-                    printPremiumShoetoFileHistory(userEmail, nova1, SELL_FILE);*/
+                    printPremiumShoetoFileHistory(userEmail, nova2, SELL_FILE);
                     break;
                 case 3:
                    Mala nova3 = Mala.createHandbag();
@@ -43,10 +44,9 @@ public class Sell {
                     printHandbagToFileHistory(userEmail, nova3, SELL_FILE);
                     break;
                 case 4:
-                    /*
                     MalaPremium nova4 = MalaPremium.createPremiumHandbag();
                     printPremiumHandbagToFile(nova4, ARTICLES_FILE);
-                    printPremiumHandbagToFileHistory(userEmail, nova3, SELL_FILE);*/
+                    printPremiumHandbagToFileHistory(userEmail, nova4, SELL_FILE);
                     break;
                 case 5:
                     Tshirt nova5 = Tshirt.createTshirt();

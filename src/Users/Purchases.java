@@ -1,9 +1,6 @@
 package Users;
 
-import Items.Artigo;
-import Items.Mala;
-import Items.Sapatilha;
-import Items.Tshirt;
+import Items.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,7 +84,14 @@ public class Purchases {
                         String cor = itemDetails[10];
                         int ano_colecao = Integer.parseInt(itemDetails[11]);
                         allItems.add(new Sapatilha(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, tamanho, atacadores, cor, ano_colecao));
-                    } else if (itemId.startsWith("TN")) {
+                    } else if (itemId.startsWith("SP")) {
+                        int tamanho = Integer.parseInt(itemDetails[8]);
+                        boolean atacadores = Boolean.parseBoolean(itemDetails[9]);
+                        String cor = itemDetails[10];
+                        int ano_colecao = Integer.parseInt(itemDetails[11]);
+                        String autor = itemDetails[12];
+                        allItems.add(new SapatilhaPremium(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, tamanho, atacadores, cor, ano_colecao, autor));
+                    }else if (itemId.startsWith("TN")) {
                         String tamanho = itemDetails[8];
                         String padrao = itemDetails[9];
                         allItems.add(new Tshirt(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, tamanho, padrao));
@@ -96,6 +100,12 @@ public class Purchases {
                         int ano_colecao = Integer.parseInt(itemDetails[9]);
                         String material = itemDetails[10];
                         allItems.add(new Mala(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, dimensao, ano_colecao, material));
+                    } else if (itemId.startsWith("HP")) {
+                        String dimensao = itemDetails[8];
+                        int ano_colecao = Integer.parseInt(itemDetails[9]);
+                        String material = itemDetails[10];
+                        String autor = itemDetails[11];
+                        allItems.add(new MalaPremium(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, dimensao, ano_colecao, material, autor));
                     }
                 }
             } catch (FileNotFoundException e) {
@@ -152,6 +162,13 @@ public class Purchases {
                     String cor = itemDetails[10].split(":")[1].trim();
                     int ano_colecao = Integer.parseInt(itemDetails[11].split(":")[1].trim());
                     allItems.add(new Sapatilha(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, tamanho, atacadores, cor, ano_colecao));
+                } else if (itemId.startsWith("SP")) {
+                    int tamanho = Integer.parseInt(itemDetails[8]);
+                    boolean atacadores = Boolean.parseBoolean(itemDetails[9]);
+                    String cor = itemDetails[10];
+                    int ano_colecao = Integer.parseInt(itemDetails[11]);
+                    String autor = itemDetails[12];
+                    allItems.add(new SapatilhaPremium(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, tamanho, atacadores, cor, ano_colecao, autor));
                 } else if (itemId.startsWith("TN")) {
                     String tamanho = itemDetails[8].split(":")[1].trim();
                     String padrao = itemDetails[9].split(":")[1].trim();
@@ -161,6 +178,12 @@ public class Purchases {
                     int ano_colecao = Integer.parseInt(itemDetails[9].split(":")[1].trim());
                     String material = itemDetails[10].split(":")[1].trim();
                     allItems.add(new Mala(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, dimensao, ano_colecao, material));
+                } else if (itemId.startsWith("HP")) {
+                    String dimensao = itemDetails[8];
+                    int ano_colecao = Integer.parseInt(itemDetails[9]);
+                    String material = itemDetails[10];
+                    String autor = itemDetails[11];
+                    allItems.add(new MalaPremium(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, dimensao, ano_colecao, material, autor));
                 }
             }
         }
