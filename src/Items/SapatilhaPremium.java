@@ -2,7 +2,6 @@ package Items;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,19 +40,10 @@ public class SapatilhaPremium extends Sapatilha{
     }
 
 
-
-
-
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Premium ").append(super.toString()).append(", Autor: ").append(this.autor);
-        return sb.toString();
+    public SapatilhaPremium clone() {
+        return new SapatilhaPremium(this);
     }
-    public String toString2(){
-        return super.toString2() + ":" + this.autor;
-    }
-    
-    
+
     public void calculaPreco(){
         this.setDesconto(2*(Data.tempo.getYear()-this.getAno_colecao()));
         this.setPreco(this.getPreco()*(1+this.getDesconto()/100)+this.taxaSatisfacao());
@@ -146,4 +136,16 @@ public class SapatilhaPremium extends Sapatilha{
             System.out.println("Failed to print Shoe to file history.");
         }
     }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Premium ").append(super.toString()).append(", Autor: ").append(this.autor);
+        return sb.toString();
+    }
+
+    @Override
+    public String toString2() {
+        return super.toString2() + ":" + this.autor;
+    }
+
 }

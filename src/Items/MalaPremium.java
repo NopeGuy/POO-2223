@@ -6,7 +6,6 @@ import Transportation.Transportadora;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,15 +40,10 @@ public class MalaPremium extends Mala{
         this.autor = autor;
     }
 
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Premium ").append(super.toString()).append(", Autor: ").append(this.autor);
-        return sb.toString();
-    }
-    public String toString2(){
-        return super.toString2() + ":" + this.autor;
-    }
 
+    public MalaPremium clone() {
+        return new MalaPremium(this);
+    }
 
     public void calculaPreco(){
         this.setDesconto(2*(Data.tempo.getYear()-this.getAno_colecao()));
@@ -170,5 +164,17 @@ public class MalaPremium extends Mala{
         } catch (IOException e) {
             System.out.println("Failed to print Handbag to file history.");
         }
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Premium ").append(super.toString()).append(", Autor: ").append(this.autor);
+        return sb.toString();
+    }
+    
+    @Override
+    public String toString2() {
+        return super.toString2() + ":" + this.autor;
     }
 }
