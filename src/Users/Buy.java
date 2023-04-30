@@ -48,16 +48,17 @@ public class Buy {
                 case 2:
                     System.out.println("Select the item you want to add to your shopping cart typing the id: ");
                     itemId = scanner.next();
+                    boolean itemFound = false;
                     for (Artigo artigo : stock) {
                         if (Objects.equals(artigo.getItem_id(), itemId)) {
                             cart.add(artigo);
                             System.out.println("Item added to cart.");
+                            itemFound = true;
                             break;
                         }
-                        else {
-                            System.out.println("Inserted ID doesn't exist.\n");
-                            break;
-                        }
+                    }
+                    if (!itemFound) {
+                        System.out.println("Inserted ID doesn't exist.\n");
                     }
                     break;
                 case 3:

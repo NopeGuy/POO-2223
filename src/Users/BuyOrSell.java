@@ -44,7 +44,6 @@ public class BuyOrSell {
                     Encomenda.atualizarEstadoEncomendas();
                     break;
                 case 81:
-                    //mudaTransportes;
                     Transportadora.transporteMenu(userEmail);
                     break;
                 case 82:
