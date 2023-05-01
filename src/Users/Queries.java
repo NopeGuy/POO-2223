@@ -1,5 +1,9 @@
 package Users;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import static Users.BuyOrSell.buyOrSellArticle;
 
@@ -17,7 +21,7 @@ public class Queries {
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-
+                    sellerWithHighestBilling(SELL_FILE);
                     break;
                 case 2:
                 
@@ -38,6 +42,48 @@ public class Queries {
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
+        }
+    }
+
+
+
+    public static void sellerWithHighestBilling(String sellFile) {
+        try {
+            Map<String, Double> sellerToBilling = new HashMap<>();
+
+            File file = new File(sellFile);
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(":");
+                String seller = parts[0];
+                double billing = Double.parseDouble(parts[5]);
+
+                if (sellerToBilling.containsKey(seller)) {
+                    double totalBilling = sellerToBilling.get(seller) + billing;
+                    sellerToBilling.put(seller, totalBilling);
+                } else {
+                    sellerToBilling.put(seller, billing);
+                }
+            }
+            scanner.close();
+
+            double highestBilling = 0;
+            String sellerWithHighestBilling = "";
+
+            for (String seller : sellerToBilling.keySet()) {
+                double billing = sellerToBilling.get(seller);
+                if (billing > highestBilling) {
+                    highestBilling = billing;
+                    sellerWithHighestBilling = seller;
+                }
+            }
+
+            System.out.println("\nSeller with highest billing: " + sellerWithHighestBilling + " (" + String.format("%.2f", highestBilling) + ")\n");
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
         }
     }
 }
