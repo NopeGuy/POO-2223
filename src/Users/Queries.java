@@ -61,13 +61,32 @@ public class Queries {
                 String line = scanner.nextLine();
                 String[] parts = line.split(":");
                 String seller = parts[0];
-                double billing = Double.parseDouble(parts[5]);
+                double price = Double.parseDouble(parts[5]);
+                String itemID = parts[3];
+                boolean itemSold = false;
 
-                if (sellerToBilling.containsKey(seller)) {
-                    double totalBilling = sellerToBilling.get(seller) + billing;
-                    sellerToBilling.put(seller, totalBilling);
-                } else {
-                    sellerToBilling.put(seller, billing);
+                // check if itemID is present in buyhistory.txt
+                File buyHistoryFile = new File("Files/buyhistory.txt");
+                Scanner buyHistoryScanner = new Scanner(buyHistoryFile);
+                while (buyHistoryScanner.hasNextLine()) {
+                    String buyHistoryLine = buyHistoryScanner.nextLine();
+                    String[] buyHistoryParts = buyHistoryLine.split(":");
+                    String buyHistoryItemID = buyHistoryParts[3];
+                    if (buyHistoryItemID.equals(itemID)) {
+                        itemSold = true;
+                        break;
+                    }
+                }
+                buyHistoryScanner.close();
+
+                // add price to seller's billing if item was sold
+                if (itemSold) {
+                    if (sellerToBilling.containsKey(seller)) {
+                        double totalBilling = sellerToBilling.get(seller) + price;
+                        sellerToBilling.put(seller, totalBilling);
+                    } else {
+                        sellerToBilling.put(seller, price);
+                    }
                 }
             }
             scanner.close();
@@ -83,7 +102,8 @@ public class Queries {
                 }
             }
 
-            System.out.println("\nSeller with highest billing: " + sellerWithHighestBilling + " (" + String.format("%.2f", highestBilling) + ")\n");
+            System.out.println("\nSeller with highest billing: " + sellerWithHighestBilling + " ($"
+                    + String.format("%.2f", highestBilling) + ")\n");
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());

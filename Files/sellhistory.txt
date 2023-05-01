@@ -17,4 +17,4 @@ isabela@boda.com:isabela:valnisios:TN75472:CTT:34790.0:0.0:1:10000:M:plain
 a:asd:asd:TN99774:GLS:420.0:0.0:0:1:XL:stripes
 a:Prem:o:HP90296:Fedex:40.0:0.0:0:3:large:2000:leather:Bodaman
 a:asd:asd:HP32503:GLS:3.0:0.0:3:3:large:20:leather:bodaman
-lu@mail:Boda:Boda:HP89517:Fedex:100.0:0.0:2:10:large:2015:leather:Boda Man
+boda@boda.com:Boda:Boda:HP89517:Fedex:100.0:0.0:2:10:large:2015:leather:Boda Man

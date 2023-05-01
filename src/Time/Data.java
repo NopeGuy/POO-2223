@@ -37,6 +37,8 @@ public class Data {
     }
 
     public static void startTempo() throws DateTimeException {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
        /* String animation = ".....        \nUnexpected System Reset\nPlease enter the system date (dd-mm-yyyy):\n->";
         for (int i = 0; i < animation.length(); i++) {
             System.out.print(animation.charAt(i));
