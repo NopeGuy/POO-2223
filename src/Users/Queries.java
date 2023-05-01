@@ -27,7 +27,7 @@ public class Queries {
                     sellerWithHighestBilling(SELL_FILE);
                     break;
                 case 2:
-                
+                    carrierWithHighestBilling(BUY_FILE);
                     break;
                 case 3:
                 
@@ -65,7 +65,7 @@ public class Queries {
                 String itemID = parts[3];
                 boolean itemSold = false;
 
-                // check if itemID is present in buyhistory.txt
+                // check if itemID is present in buyhistory
                 File buyHistoryFile = new File("Files/buyhistory.txt");
                 Scanner buyHistoryScanner = new Scanner(buyHistoryFile);
                 while (buyHistoryScanner.hasNextLine()) {
@@ -102,11 +102,51 @@ public class Queries {
                 }
             }
 
-            System.out.println("\nSeller with highest billing: " + sellerWithHighestBilling + " ($"
-                    + String.format("%.2f", highestBilling) + ")\n");
+            System.out.println("\nSeller with highest billing: " + sellerWithHighestBilling + " (€" + String.format("%.2f", highestBilling) + ")\n");
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());
         }
     }
+    
+public static void carrierWithHighestBilling(String buyFile) {
+    try {
+        Map<String, Integer> carrierToCount = new HashMap<>();
+
+        File file = new File(buyFile);
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(":");
+            String carrier = parts[4];
+
+            // add carrier to count
+            if (carrierToCount.containsKey(carrier)) {
+                int count = carrierToCount.get(carrier) + 1;
+                carrierToCount.put(carrier, count);
+            } else {
+                carrierToCount.put(carrier, 1);
+            }
+        }
+        scanner.close();
+
+        int highestCount = 0;
+        String carrierWithHighestCount = "";
+
+        for (String carrier : carrierToCount.keySet()) {
+            int count = carrierToCount.get(carrier);
+            if (count > highestCount) {
+                highestCount = count;
+                carrierWithHighestCount = carrier;
+            }
+        }
+
+        System.out.println("\nCarrier with highest billing: " + carrierWithHighestCount + "\n");
+
+    } catch (FileNotFoundException e) {
+        System.out.println("File not found: " + e.getMessage());
+    }
+}
+
 }
