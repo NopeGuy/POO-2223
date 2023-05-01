@@ -47,7 +47,7 @@ public class BuyOrSell {
                     Transportadora.transporteMenu(userEmail);
                     break;
                 case 82:
-                    //estatisticasMenu;
+                    Queries.statisticsMenu(userEmail);
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");

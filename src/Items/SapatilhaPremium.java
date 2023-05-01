@@ -112,7 +112,7 @@ public class SapatilhaPremium extends Sapatilha{
         int ano_colecao = Integer.parseInt(scanner.nextLine().trim());
         
         System.out.print("Enter shoe author: ");
-        String autor = scanner.nextLine().trim();
+        String autor = scanner.nextLine();
 
         return new SapatilhaPremium(descricao, marca, itemId, transportadora, preco, desconto, numDonos, stock, tamanho, atacadoresBool, cor, ano_colecao, autor);
     }

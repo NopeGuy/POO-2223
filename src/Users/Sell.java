@@ -20,7 +20,7 @@ public class Sell {
     public static void sellArticle(String userEmail) {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
-        String ARTICLES_FILE = "stock/" + userEmail + ".txt";
+        String ARTICLES_FILE = "Files/stock/" + userEmail + ".txt";
         String SELL_FILE = "Files/sellhistory.txt";
 
         while(running) {

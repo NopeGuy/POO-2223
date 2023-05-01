@@ -132,65 +132,6 @@ public class Purchases {
         return "";
     }
 
-    /* 
-    public static ArrayList<Artigo> getArtigosFromString(String colecao) {
-        ArrayList<Artigo> allItems = new ArrayList<>();
-
-        // Splitting the input string into item strings using "->"
-        String[] itemStrings = colecao.split("->");
-
-        // Processing each item string to create the corresponding Artigo object
-        for (String itemString : itemStrings) {
-            String extractedItemString = extractItem(itemString);
-            if (!extractedItemString.isEmpty()) {
-                String[] itemDetails = extractedItemString.replaceAll("[\\[\\]]", "").split(", ");
-
-                // Extracting the values from each part
-                String descricao = itemDetails[0].split(":")[1].trim();
-                String marca = itemDetails[1].split(":")[1].trim();
-                String itemId = itemDetails[2].split(":")[1].trim();
-                String transport = itemDetails[3].split(":")[1].trim();
-                Double preco = Double.parseDouble(itemDetails[4].split(":")[1].trim());
-                Double desconto = Double.parseDouble(itemDetails[5].split(":")[1].trim());
-                int num_donos = Integer.parseInt(itemDetails[6].substring(itemDetails[6].indexOf(":") + 1).trim());
-                int stock = Integer.parseInt(itemDetails[7].split(":")[1].trim());
-
-                // Checking the type of the item using the first two characters of itemId
-                if (itemId.startsWith("SN")) {
-                    int tamanho = Integer.parseInt(itemDetails[8].split(":")[1].trim());
-                    boolean atacadores = Boolean.parseBoolean(itemDetails[9].split(":")[1].trim());
-                    String cor = itemDetails[10].split(":")[1].trim();
-                    int ano_colecao = Integer.parseInt(itemDetails[11].split(":")[1].trim());
-                    allItems.add(new Sapatilha(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, tamanho, atacadores, cor, ano_colecao));
-                } else if (itemId.startsWith("SP")) {
-                    int tamanho = Integer.parseInt(itemDetails[8]);
-                    boolean atacadores = Boolean.parseBoolean(itemDetails[9]);
-                    String cor = itemDetails[10];
-                    int ano_colecao = Integer.parseInt(itemDetails[11]);
-                    String autor = itemDetails[12];
-                    allItems.add(new SapatilhaPremium(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, tamanho, atacadores, cor, ano_colecao, autor));
-                } else if (itemId.startsWith("TN")) {
-                    String tamanho = itemDetails[8].split(":")[1].trim();
-                    String padrao = itemDetails[9].split(":")[1].trim();
-                    allItems.add(new Tshirt(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, tamanho, padrao));
-                } else if (itemId.startsWith("HN")) {
-                    String dimensao = itemDetails[8].split(":")[1].trim();
-                    int ano_colecao = Integer.parseInt(itemDetails[9].split(":")[1].trim());
-                    String material = itemDetails[10].split(":")[1].trim();
-                    allItems.add(new Mala(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, dimensao, ano_colecao, material));
-                } else if (itemId.startsWith("HP")) {
-                    String dimensao = itemDetails[8];
-                    int ano_colecao = Integer.parseInt(itemDetails[9]);
-                    String material = itemDetails[10];
-                    String autor = itemDetails[11];
-                    allItems.add(new MalaPremium(descricao, marca, itemId, transport, preco, desconto, num_donos, stock, dimensao, ano_colecao, material, autor));
-                }
-            }
-        }
-        return allItems;
-    }
-*/
-
 
     public static void removeItemFromUserStock(String userEmail, String itemId) {
         File folder = new File("Files/stock/");

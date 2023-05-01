@@ -141,7 +141,7 @@ public class MalaPremium extends Mala{
         }
 
         System.out.print("Enter handbag author: ");
-        String autor = scanner.nextLine().trim();
+        String autor = scanner.nextLine();
 
         return new MalaPremium(descricao, marca, itemId, transportadora, preco, desconto, numDonos, stock, dimensao, anoColecao, material, autor);
     }
