@@ -2,3 +2,4 @@ boda:bods:SN20612:UPS:677.0:0.0:0:12:39:false:black:2000
 asd:asd:SN73389:CTT:200.0:0.0:3:1:25:false:black:2022
 asd:asd:TN99774:GLS:420.0:0.0:0:1:XL:stripes
 Boda pls work:abiboboas:SP98115:Fedex:1000.0:0.0:0:1:400:true:borck:2000:AbiboMan
+Bela Premium:Muito bonita:SP29836:GLS:200.0:0.0:0:1:40:false:black:2002:Bela

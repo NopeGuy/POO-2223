@@ -20,7 +20,7 @@ public class Queries {
 
         while (running) {
             System.out.println(
-                    "Select one of the following: \n 1) Seller who billed the most \n 2) Carrier which has the highest billing volume \n 3) Orders issued by a seller \n 4) Ranking of the largest buyers/sellers in the system \n 5) Vintage Profits \n\n  0) Exit:");
+                    "Select one of the following: \n 1) Seller who billed the most \n 2) Carrier which has the highest billing volume \n 3) Ranking of the biggest buyers \n 4) Ranking of the biggest sellers \n 5) Vintage Profits \n\n  0) Exit:");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -30,13 +30,13 @@ public class Queries {
                     carrierWithHighestBilling(BUY_FILE);
                     break;
                 case 3:
-                
+                    largestBuyersSellers(BUY_FILE, 1);
                     break;
                 case 4:
-                
+                    largestBuyersSellers(SELL_FILE, 0);
                     break;
                 case 5:
-                
+                    vintageProfits(BUY_FILE);
                     break;
                 case 0:
                     buyOrSellArticle(userEmail);
@@ -47,8 +47,6 @@ public class Queries {
             }
         }
     }
-
-
 
     public static void sellerWithHighestBilling(String sellFile) {
         try {
@@ -102,51 +100,111 @@ public class Queries {
                 }
             }
 
-            System.out.println("\nSeller with highest billing: " + sellerWithHighestBilling + " (€" + String.format("%.2f", highestBilling) + ")\n");
+            System.out.println("\nSeller with highest billing: " + sellerWithHighestBilling + " (€"
+                    + String.format("%.2f", highestBilling) + ")\n");
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());
         }
     }
-    
-public static void carrierWithHighestBilling(String buyFile) {
-    try {
-        Map<String, Integer> carrierToCount = new HashMap<>();
 
-        File file = new File(buyFile);
-        Scanner scanner = new Scanner(file);
+    public static void carrierWithHighestBilling(String buyFile) {
+        try {
+            Map<String, Integer> carrierToCount = new HashMap<>();
 
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            String[] parts = line.split(":");
-            String carrier = parts[4];
+            File file = new File(buyFile);
+            Scanner scanner = new Scanner(file);
 
-            // add carrier to count
-            if (carrierToCount.containsKey(carrier)) {
-                int count = carrierToCount.get(carrier) + 1;
-                carrierToCount.put(carrier, count);
-            } else {
-                carrierToCount.put(carrier, 1);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(":");
+                String carrier = parts[4];
+
+                // add carrier to count
+                if (carrierToCount.containsKey(carrier)) {
+                    int count = carrierToCount.get(carrier) + 1;
+                    carrierToCount.put(carrier, count);
+                } else {
+                    carrierToCount.put(carrier, 1);
+                }
             }
-        }
-        scanner.close();
+            scanner.close();
 
-        int highestCount = 0;
-        String carrierWithHighestCount = "";
+            int highestCount = 0;
+            String carrierWithHighestCount = "";
 
-        for (String carrier : carrierToCount.keySet()) {
-            int count = carrierToCount.get(carrier);
-            if (count > highestCount) {
-                highestCount = count;
-                carrierWithHighestCount = carrier;
+            for (String carrier : carrierToCount.keySet()) {
+                int count = carrierToCount.get(carrier);
+                if (count > highestCount) {
+                    highestCount = count;
+                    carrierWithHighestCount = carrier;
+                }
             }
+
+            System.out.println("\nCarrier with highest billing: " + carrierWithHighestCount + "\n");
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
         }
-
-        System.out.println("\nCarrier with highest billing: " + carrierWithHighestCount + "\n");
-
-    } catch (FileNotFoundException e) {
-        System.out.println("File not found: " + e.getMessage());
     }
-}
 
+    public static void largestBuyersSellers(String filestring, int choice) {
+        try {
+            Map<String, Double> sellerToTotal = new HashMap<>();
+
+            File file = new File(filestring);
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(":");
+                String seller = parts[0];
+                double price = Double.parseDouble(parts[5]);
+
+                if (sellerToTotal.containsKey(seller)) {
+                    double total = sellerToTotal.get(seller) + price;
+                    sellerToTotal.put(seller, total);
+                } else {
+                    sellerToTotal.put(seller, price);
+                }
+            }
+            scanner.close();
+
+            if(choice == 1){
+                System.out.println("\nTop 10 largest buyers:");
+            } else {
+                System.out.println("\nTop 10 largest sellers:");
+            }
+            sellerToTotal.entrySet().stream()
+                    .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                    .limit(10)
+                    .forEach(entry -> System.out
+                            .println(entry.getKey() + " (€" + String.format("%.2f", entry.getValue()) + ")"));
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+
+        System.out.println("\n");
+    }
+
+    public static void vintageProfits(String buyFile) {
+        double totalProfit = 0;
+        try {
+            File file = new File(buyFile);
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(":");
+                double profit = Double.parseDouble(parts[5]);
+                totalProfit += profit;
+            }
+            scanner.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+        System.out.println("\nTotal profit of Vintage: " + String.format("%.2f", totalProfit) + "€\n");
+    }
 }
