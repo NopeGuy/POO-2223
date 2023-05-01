@@ -18,6 +18,9 @@ import static Users.BuyOrSell.buyOrSellArticle;
 
 public class Sell {
     public static void sellArticle(String userEmail) {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
         String ARTICLES_FILE = "Files/stock/" + userEmail + ".txt";

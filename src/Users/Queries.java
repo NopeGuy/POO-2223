@@ -9,6 +9,9 @@ import static Users.BuyOrSell.buyOrSellArticle;
 
 public class Queries {
     public static void statisticsMenu(String userEmail) {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
         String BUY_FILE = "Files/buyhistory.txt";

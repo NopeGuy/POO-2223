@@ -12,6 +12,9 @@ public class BuyOrSell {
     public static void buyOrSellArticle(String userEmail) {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
+        //clear the screen
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
 
         while(running) {
             System.out.println("Welcome to the shop, today is "+ tempo + ",\nWhat are you here for?: \n 1) Buy \n 2) Sell \n 3) Buy history \n 4) Sell history \n 5) Check and Return packages \n 6) Check Admin Functionality\n\n  0) exit ");
@@ -36,7 +39,9 @@ public class BuyOrSell {
                     Pack.packagesMenu(userEmail);
                     break;
                 case 6:
-                    System.out.println("Admin functions are:\n 80) Skip 'x' days\n 81) Change package carriers\n 82) Store statistics\n\nPlease enter one of those options to continue with admin functions");
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
+                    System.out.println("Admin functions are:\n 80) Skip 'x' days\n 81) Change package carriers\n 82) Store statistics\n\nPlease enter one of those options to continue with admin functions\n");
                     break;
                 case 80:
                     Data.addDays();

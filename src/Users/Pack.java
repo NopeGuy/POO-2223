@@ -10,6 +10,9 @@ import static Users.BuyOrSell.buyOrSellArticle;
 
 public class Pack {
     public static void packagesMenu(String userEmail){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
         ArrayList<Encomenda> encomendas;

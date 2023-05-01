@@ -36,11 +36,29 @@ public class Purchases {
                                     + ", Price: " + values[5] + ", Discount: " + values[6] + ", Previous Owners: " + values[7] + ", Stock: " + values[8] + "\n" +
                                     "Size: " + values[9] + ", Has shoelaces: " + values[10] + ", Color: " + values[11] + ", Collection Year: " + values[12] + "\n");
                             break;
+                        case "SP":
+                            System.out.println("Premium Shoe");
+                            System.out.println("Description: " + values[1] + ", Brand: " + values[2] + ", Item ID: "
+                                    + values[3] + ", Transport Company: " + values[4]
+                                    + ", Price: " + values[5] + ", Discount: " + values[6] + ", Previous Owners: "
+                                    + values[7] + ", Stock: " + values[8] + "\n" +
+                                    "Size: " + values[9] + ", Has shoelaces: " + values[10] + ", Color: " + values[11]
+                                    + ", Collection Year: " + values[12] + ", Author: " + values[13] +"\n");
+                            break;
                         case "HN":
                             System.out.println("Handbag");
                             System.out.println("Description: " + values[1] + ", Brand: " + values[2] + ", Item ID: " + values[3] + ", Transport Company: " + values[4]
                                     + ", Price: " + values[5] + ", Discount: " + values[6] + ", Previous Owners: " + values[7] + ", Stock: " + values[8] + "\n" +
                                     "Size: " + values[9] + ", Collection Year: " + values[10] + ", Material: " + values[11] + "\n");
+                            break;
+                        case "HP":
+                            System.out.println("Premium Handbag");
+                            System.out.println("Description: " + values[1] + ", Brand: " + values[2] + ", Item ID: "
+                                    + values[3] + ", Transport Company: " + values[4]
+                                    + ", Price: " + values[5] + ", Discount: " + values[6] + ", Previous Owners: "
+                                    + values[7] + ", Stock: " + values[8] + "\n" +
+                                    "Size: " + values[9] + ", Collection Year: " + values[10] + ", Material: "
+                                    + values[11] + ", Author: " + values[12] + "\n");
                             break;
                         default:
                             System.out.println("Unknown item type: " + itemType);

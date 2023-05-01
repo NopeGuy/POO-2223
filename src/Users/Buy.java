@@ -15,6 +15,9 @@ import static Users.Purchases.removeItemFromUserStock;
 
 public class Buy {
     public static void buyArticle(String userEmail) {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
         Encomenda encomenda = new Encomenda(new ArrayList<>(),0,0.0,"Em transito", Data.tempo,userEmail, ""); //verificar a transportadora
