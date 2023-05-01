@@ -1,5 +1,5 @@
-A really nice show:abibas:SN69846:UPS:20000.0:0.0:30:23:53:true:yellow:2050
-Tshirt:Adibos:TN300000:UPS:100.0:1.0:0:24:L:palm trees
+A really nice show:abibas:SN69846:UPS:20000.0:0.0:30:21:53:true:yellow:2050
+Tshirt:Adibos:TN300000:UPS:100.0:1.0:0:23:L:palm trees
 fuck me:it sure is:SN17830:UPS:256.0:0.0:2:16:43:false:yellow:2000
 a:a:SN54038:UPS:25.0:0.0:2:27:2:false:black:2000
 a:a:TN71063:CTT:25.0:0.0:1:22:L:plain

@@ -27,10 +27,10 @@ public class BuyOrSell {
                     Sell.sellArticle(userEmail);
                     break;
                 case 3:
-                    Purchases.printUserSales(userEmail, "buyhistory.txt");
+                    Purchases.printUserSales(userEmail, "Files/buyhistory.txt");
                     break;
                 case 4:
-                    Purchases.printUserSales(userEmail, "sellhistory.txt");
+                    Purchases.printUserSales(userEmail, "Files/sellhistory.txt");
                     break;
                 case 5:
                     Pack.packagesMenu(userEmail);

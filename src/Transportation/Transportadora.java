@@ -144,7 +144,7 @@ public class Transportadora {
         List<Transportadora> transportadoras = new ArrayList<>();
         try {
             // Abrir o database.txt
-            File file = new File("src/Transportation/transportadoras.txt");
+            File file = new File("Files/transportadoras.txt");
             Scanner scanner = new Scanner(file);
 
             // Read the file line by line
@@ -196,7 +196,7 @@ public class Transportadora {
         transportadoras.add(transportadora);
 
         try {
-            FileWriter writer = new FileWriter("src/Transportation/transportadoras.txt", true);
+            FileWriter writer = new FileWriter("Files/transportadoras.txt", true);
             writer.write(nome + "," + precoPequena + "," + precoMedia + "," + precoGrande + "\n");
             writer.close();
             System.out.println("\nCarrier added successfully.");
@@ -211,7 +211,7 @@ public class Transportadora {
             FileWriter tempWriter = new FileWriter(tempFile);
             transportadoras.removeIf(transportadora -> transportadora.getNome().equals(name));
 
-            File file = new File("src/Transportation/transportadoras.txt");
+            File file = new File("Files/transportadoras.txt");
             Scanner scanner = new Scanner(file);
             boolean found = false;
             while (scanner.hasNextLine()) {

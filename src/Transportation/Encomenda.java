@@ -45,7 +45,7 @@ public class Encomenda {
     public static ArrayList<Encomenda> readPackagesFromFile() {
         ArrayList<Encomenda> encomendas = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("orders.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("Files/orders.txt"));
             String line = reader.readLine();
             while (line != null) {
                 String[] parts = line.split(";");
@@ -58,7 +58,6 @@ public class Encomenda {
                 String estado = parts[5];
                 LocalDate data = LocalDate.parse(parts[6]);
 
-                // Extract the artigos from the second part
                 Collection<Artigo> artigos = new ArrayList<>();
 
                 Encomenda encomenda = new Encomenda(artigos, dimensao, preco_final, estado, data, buyerEmail, ID);
@@ -74,8 +73,8 @@ public class Encomenda {
     }
 
     public static void removePackageFromFile(String packageID) {
-        File inputFile = new File("orders.txt");
-        File tempFile = new File("temp.txt");
+        File inputFile = new File("Files/orders.txt");
+        File tempFile = new File("Files/temp.txt");
         boolean encontrou=false;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
@@ -224,7 +223,7 @@ public class Encomenda {
 
     public static void addEncomendaToFile(String userEmail, Encomenda encomenda) {
         try {
-            FileWriter writer = new FileWriter("orders.txt", true);
+            FileWriter writer = new FileWriter("Files/orders.txt", true);
             StringBuilder collectionLine = new StringBuilder();
             collectionLine.append("|");
             for (Artigo a : encomenda.getColecao()) {
@@ -241,7 +240,7 @@ public class Encomenda {
     }
 
     public static void atualizarEstadoEncomendas(){
-        String inputFile = "orders.txt";
+        String inputFile = "Files/orders.txt";
         LocalDate twoDaysAgo = tempo.minusDays(2);
         List<String> lines = new ArrayList<>();
 

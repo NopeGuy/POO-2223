@@ -59,13 +59,13 @@ public class Purchases {
 
     public static ArrayList<Artigo> getAllSales(String userEmail) {
         ArrayList<Artigo> allItems = new ArrayList<>();
-        String[] stockFiles = new File("stock").list();
+        String[] stockFiles = new File("Files/stock").list();
 
         assert stockFiles != null;
         for (String stockFile : stockFiles) {
             if (stockFile.equals(userEmail + ".txt")) continue; // Skip the user's own stock file
 
-            try (Scanner scanner = new Scanner(new File("stock/" + stockFile))) {
+            try (Scanner scanner = new Scanner(new File("Files/stock/" + stockFile))) {
                 while (scanner.hasNextLine()) {
                     String[] itemDetails = scanner.nextLine().split(":");
                     String descricao = itemDetails[0];
@@ -193,7 +193,7 @@ public class Purchases {
 
 
     public static void removeItemFromUserStock(String userEmail, String itemId) {
-        File folder = new File("stock/");
+        File folder = new File("Files/stock/");
         File[] files = folder.listFiles();
 
         assert files != null;
@@ -216,17 +216,14 @@ public class Purchases {
                                 stock--;
                                 values[7] = Integer.toString(stock);
                                 line = String.join(":", values);
-                                // Write the removed line to buyhistory.txt
-                                FileWriter historyWriter = new FileWriter("buyhistory.txt", true);
+                                FileWriter historyWriter = new FileWriter("Files/buyhistory.txt", true);
                                 historyWriter.write(userEmail + ":" + line + "\n");
                                 historyWriter.close();
                             }
                         }
                         lines.add(line);
                     }
-
                     scanner.close();
-
                     FileWriter writer = new FileWriter(file);
 
                     for (String line : lines) {

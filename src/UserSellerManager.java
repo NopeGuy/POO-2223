@@ -10,7 +10,7 @@ import static Users.User.*;
 
 public class UserSellerManager {
 
-    private static final String USERS_FILE = "users.txt";
+    private static final String USERS_FILE = "Files/users.txt";
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);

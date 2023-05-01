@@ -1,3 +1,0 @@
-THIS:ONE:HN3648:UPS:25.0:0.0:3:189:large:2000:leather
-premium hand:asd:HP42870:Fedex:100.0:0.0:0:9:large:2010:leather:Boda
-Premium shoe:asd:SP55554:CTT:100.0:0.0:3:6:37:false:yellow:2010:BodaMan

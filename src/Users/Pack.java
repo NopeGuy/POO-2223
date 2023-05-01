@@ -1,11 +1,7 @@
 package Users;
 
-import Items.Mala;
-import Items.Sapatilha;
-import Items.Tshirt;
 import Transportation.Encomenda;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 

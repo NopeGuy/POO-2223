@@ -21,7 +21,7 @@ public class Sell {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
         String ARTICLES_FILE = "stock/" + userEmail + ".txt";
-        String SELL_FILE = "sellhistory.txt";
+        String SELL_FILE = "Files/sellhistory.txt";
 
         while(running) {
             System.out.println("Select which article to sell: \n 1) Shoes \n 2) Premium Shoes \n 3) Handbags \n 4) Premium Handbags \n 5) T-Shirts \n\n  0) Exit:");
