@@ -24,18 +24,28 @@ public class Queries {
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
                     sellerWithHighestBilling(SELL_FILE);
                     break;
                 case 2:
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
                     carrierWithHighestBilling(BUY_FILE);
                     break;
                 case 3:
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
                     largestBuyersSellers(BUY_FILE, 1);
                     break;
                 case 4:
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
                     largestBuyersSellers(SELL_FILE, 0);
                     break;
                 case 5:
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
                     vintageProfits(BUY_FILE);
                     break;
                 case 0:
@@ -171,21 +181,20 @@ public class Queries {
             scanner.close();
 
             if(choice == 1){
-                System.out.println("\nTop 10 largest buyers:");
+                System.out.println("\nTop 10 largest buyers:\n");
             } else {
-                System.out.println("\nTop 10 largest sellers:");
+                System.out.println("\nTop 10 largest sellers:\n");
             }
             sellerToTotal.entrySet().stream()
                     .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
                     .limit(10)
                     .forEach(entry -> System.out
                             .println(entry.getKey() + " (€" + String.format("%.2f", entry.getValue()) + ")"));
+            System.out.println("\n");
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());
         }
-
-        System.out.println("\n");
     }
 
     public static void vintageProfits(String buyFile) {
