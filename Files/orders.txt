@@ -1,3 +1,0 @@
-a;[|premium hand:asd:HP42870:Fedex:6.875:24.0:0:5:large:2010:leather:Boda|A really nice show:abibas:SN69846:UPS:20000.25:0.0:30:22:53:true:yellow:2050|isabela:valnisios:TN75472:CTT:17395.25:50.0:1:9998:M:plain|];60974;3;74827.75;Entregue;2022-11-25
-a;[|premium hand:asd:HP42870:Fedex:6.875:24.0:0:4:large:2010:leather:Boda|];6569;1;16.75;Em transito;2022-11-25
-lu@mail;[|a:a:TN71063:CTT:12.75:50.0:1:22:L:plain|];59801;1;30.5;Em transito;2022-11-25

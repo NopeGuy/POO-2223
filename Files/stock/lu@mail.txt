@@ -1,4 +1,0 @@
-THIS:ONE:HN3648:UPS:25.0:0.0:3:189:large:2000:leather
-premium hand:asd:HP42870:Fedex:100.0:0.0:0:3:large:2010:leather:Boda
-Primo:Baf:HP1485:GLS:24.0:0.0:0:100:large:2010:leather:Bodacious Boda Man
-Boda:Boda:HP89517:Fedex:100.0:0.0:2:10:large:2015:leather:Boda Man
